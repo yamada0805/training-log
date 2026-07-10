@@ -1,0 +1,767 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="サブエガ">
+<meta name="theme-color" content="#0d2b45">
+<title>サブエガ運用</title><style>
+:root{--fg:#1a1f26;--mut:#667;--line:#e0e6ee;--acc:#1f6feb}
+*{box-sizing:border-box}
+body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;color:var(--fg);background:#f4f7fb;margin:0;line-height:1.7}
+.wrap{max-width:820px;margin:0 auto;padding:0 14px 60px}
+header{position:sticky;top:0;background:#0d2b45;color:#fff;z-index:10;padding:10px 14px 0}
+header .t{font-size:16px;font-weight:700}
+header .s{font-size:11px;color:#9fc0e0;margin-bottom:8px}
+nav{display:flex;gap:6px}
+nav button{flex:1;border:none;background:#124a7a;color:#cfe0f3;font-size:14px;padding:10px 4px;border-radius:8px 8px 0 0;cursor:pointer;font-weight:700}
+nav button.on{background:#f4f7fb;color:#0d2b45}
+section{display:none;padding-top:16px}
+section.on{display:block}
+/* plan */
+#plan h1{font-size:19px;color:#0d2b45;border-bottom:3px solid var(--acc);padding-bottom:5px;margin:26px 0 12px}
+#plan h2{font-size:16px;color:#124a7a;border-left:5px solid var(--acc);padding-left:9px;margin:22px 0 10px}
+#plan h3{font-size:14px;color:#1b5e20;margin:16px 0 6px}
+#plan p{margin:7px 0}
+#plan strong{color:#b3261e}
+#plan h1 strong,#plan h2 strong,#plan h3 strong{color:inherit}
+#plan ul,#plan ol{padding-left:20px;margin:7px 0}
+#plan li{margin:4px 0}
+#plan blockquote{background:#eef4fb;border-left:5px solid var(--acc);border-radius:6px;padding:8px 14px;margin:14px 0}
+#plan pre{background:#0d2b45;color:#d6e4f0;padding:10px 12px;border-radius:8px;overflow-x:auto;font-size:12px}
+#plan code{background:#f0f2f5;padding:1px 4px;border-radius:3px;font-size:12px}
+#plan pre code{background:none;color:inherit}
+#plan table{border-collapse:collapse;width:100%;font-size:12px;margin:10px 0;display:block;overflow-x:auto}
+#plan th,#plan td{border:1px solid #c4ccd6;padding:5px 7px;text-align:left;vertical-align:top;white-space:nowrap}
+#plan th{background:var(--acc);color:#fff}
+#plan hr{border:none;border-top:1px dashed #c4ccd6;margin:18px 0}
+/* dashboard */
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:680px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card.wide{grid-column:1/-1}
+.card h3{font-size:13px;color:#124a7a;margin:0 0 10px}
+.chart{width:100%;height:auto}
+.tick{font-size:10px;fill:#8a97a8}.last{font-size:12px;font-weight:700;fill:#0d2b45}
+.target{font-size:10px;fill:#e0563f}.empty{color:#99a;padding:34px 0;text-align:center}
+table{width:100%;border-collapse:collapse;font-size:12px}
+.card th,.card td{border:1px solid #e6ebf1;padding:5px 8px;text-align:left;vertical-align:top}
+.card th{background:var(--acc);color:#fff}
+.card tr:nth-child(even) td{background:#f7f9fc}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.fbtn{font-size:11px;padding:4px 10px;border:1px solid #d7dee8;border-radius:14px;background:#fff;color:#456}
+.fbtn.active{background:var(--acc);color:#fff;border-color:var(--acc)}
+.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10.5px;font-weight:700;white-space:nowrap}
+.tblwrap{overflow-x:auto}
+table.rec{white-space:nowrap}table.rec th{cursor:pointer}
+table.rec td.num{text-align:right}table.rec td.wrap{white-space:normal;min-width:140px;max-width:240px}
+</style></head><body>
+<header>
+  <div class="t">🏃 サブエガ運用</div>
+  <div class="s">更新 2026-07-10 17:37 ／ 累計 12km ／ 記録 1本</div>
+  <nav>
+    <button data-t="dash" class="on" onclick="tab('dash')">グラフ</button>
+    <button data-t="log" onclick="tab('log')">記録</button>
+    <button data-t="plan" onclick="tab('plan')">計画</button>
+  </nav>
+</header>
+<div class="wrap">
+  <section id="dash" class="on"><div class="grid"><div class="card"><h3>LT-long ペース推移（同一心拍での進歩＝第一計器）</h3><div class="empty">データがまだありません（「報告」で溜まります）</div></div><div class="card"><h3>LT-short ペース推移</h3><svg viewBox="0 0 660 260" class="chart"><line x1="56" y1="34.0" x2="642" y2="34.0" stroke="#e6ebf1"/><text x="48" y="38.0" text-anchor="end" class="tick">3:51</text><line x1="56" y1="79.0" x2="642" y2="79.0" stroke="#e6ebf1"/><text x="48" y="83.0" text-anchor="end" class="tick">3:51</text><line x1="56" y1="124.0" x2="642" y2="124.0" stroke="#e6ebf1"/><text x="48" y="128.0" text-anchor="end" class="tick">3:50</text><line x1="56" y1="169.0" x2="642" y2="169.0" stroke="#e6ebf1"/><text x="48" y="173.0" text-anchor="end" class="tick">3:49</text><line x1="56" y1="214.0" x2="642" y2="214.0" stroke="#e6ebf1"/><text x="48" y="218.0" text-anchor="end" class="tick">3:49</text><text x="349.0" y="236.0" text-anchor="middle" class="tick">07-09</text><polyline points="349.0,124.0" fill="none" stroke="#7048e8" stroke-width="2.5"/><circle cx="349.0" cy="124.0" r="3.5" fill="#7048e8"/><text x="349.0" y="114.0" text-anchor="end" class="last">3:50</text></svg></div><div class="card"><h3>ロング ドリフト率推移</h3><div class="empty">データがまだありません（「報告」で溜まります）</div></div><div class="card"><h3>週間走行距離</h3><svg viewBox="0 0 660 260" class="chart"><line x1="56" y1="34.0" x2="642" y2="34.0" stroke="#e6ebf1"/><text x="48" y="38.0" text-anchor="end" class="tick">101</text><line x1="56" y1="78.0" x2="642" y2="78.0" stroke="#e6ebf1"/><text x="48" y="82.0" text-anchor="end" class="tick">75</text><line x1="56" y1="122.0" x2="642" y2="122.0" stroke="#e6ebf1"/><text x="48" y="126.0" text-anchor="end" class="tick">50</text><line x1="56" y1="166.0" x2="642" y2="166.0" stroke="#e6ebf1"/><text x="48" y="170.0" text-anchor="end" class="tick">25</text><line x1="56" y1="210.0" x2="642" y2="210.0" stroke="#e6ebf1"/><text x="48" y="214.0" text-anchor="end" class="tick">0</text><text x="349.0" y="232.0" text-anchor="middle" class="tick">W28</text><line x1="56" y1="57.0" x2="642" y2="57.0" stroke="#e0563f" stroke-dasharray="5 4"/><text x="642" y="52.0" text-anchor="end" class="target">目安 88km</text><rect x="167.3" y="189.3" width="363.3" height="20.7" rx="3" fill="#1b9e77"/><text x="349.0" y="183.3" text-anchor="middle" class="last">12</text></svg></div><div class="card"><h3>コンディション（動きのスコア）</h3><svg viewBox="0 0 660 260" class="chart"><line x1="56" y1="34.0" x2="642" y2="34.0" stroke="#e6ebf1"/><text x="48" y="38.0" text-anchor="end" class="tick">8</text><line x1="56" y1="79.0" x2="642" y2="79.0" stroke="#e6ebf1"/><text x="48" y="83.0" text-anchor="end" class="tick">8</text><line x1="56" y1="124.0" x2="642" y2="124.0" stroke="#e6ebf1"/><text x="48" y="128.0" text-anchor="end" class="tick">7</text><line x1="56" y1="169.0" x2="642" y2="169.0" stroke="#e6ebf1"/><text x="48" y="173.0" text-anchor="end" class="tick">6</text><line x1="56" y1="214.0" x2="642" y2="214.0" stroke="#e6ebf1"/><text x="48" y="218.0" text-anchor="end" class="tick">6</text><text x="349.0" y="236.0" text-anchor="middle" class="tick">07-09</text><polyline points="349.0,124.0" fill="none" stroke="#f08c00" stroke-width="2.5"/><circle cx="349.0" cy="124.0" r="3.5" fill="#f08c00"/><text x="349.0" y="114.0" text-anchor="end" class="last">7</text></svg></div></div></section>
+  <section id="log"><div class="grid"><div class="card wide"><h3>練習記録（種別ボタンで絞り込み・見出しクリックで並べ替え）</h3><div class="filters"><button class="fbtn active" data-t="all">すべて</button><button class="fbtn" data-t="LT-short">LT-short</button></div><div class="tblwrap"><table class="rec"><thead><tr><th data-typ="s">日付 ↕</th><th data-typ="s">種別 ↕</th><th data-typ="s">R週 ↕</th><th data-typ="n">km ↕</th><th data-typ="n">分 ↕</th><th data-typ="p">ペース ↕</th><th data-typ="n">平均HR ↕</th><th data-typ="w">内容 ↕</th><th data-typ="n">ゾーン% ↕</th><th data-typ="n">プラトー ↕</th><th data-typ="n">ドリフト% ↕</th><th data-typ="n">スコア ↕</th><th data-typ="w">違和感 ↕</th><th data-typ="n">補給 ↕</th><th data-typ="n">気温 ↕</th><th data-typ="w">メモ ↕</th><th data-typ="w">フィードバック ↕</th></tr></thead><tbody><tr data-t="LT-short"><td>2026-07-09</td><td><span class="badge" style="background:#EEEDFE;color:#3C3489">LT-short</span></td><td>Week2</td><td class="num">11.84</td><td class="num">55</td><td class="num">3:50</td><td class="num">156</td><td class="wrap">3分×10 r60秒｜TM設定 ①-④3:50 ⑤⑥3:49 ⑦3:50 ⑧-⑩3:52</td><td class="num">38</td><td class="num">172</td><td class="num">—</td><td class="num">7</td><td class="wrap">—</td><td class="num">—</td><td class="num">—</td><td class="wrap">腕時計ペース4:38はTM乖離のためTM設定値を採用。本7プラトー178=キャップ接触</td><td class="wrap">プラトー163→176の右肩上がりで教科書通り。本7のみ突っ込み。10本30分完遂</td></tr></tbody></table></div><script>(function(){
+var card=document.currentScript.closest('.card');
+var trs=[].slice.call(card.querySelectorAll('tbody tr'));
+card.querySelectorAll('.fbtn').forEach(function(b){b.onclick=function(){
+ card.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('active');});b.classList.add('active');
+ var t=b.getAttribute('data-t');
+ trs.forEach(function(tr){tr.style.display=(t==='all'||tr.getAttribute('data-t')===t)?'':'none';});};});
+function pc(s){var m=(s||'').split(':');return m.length===2?(+m[0]*60+ +m[1]):1e9;}
+var dir={};
+card.querySelectorAll('th').forEach(function(th,k){th.onclick=function(){
+ var typ=th.getAttribute('data-typ'),tb=card.querySelector('tbody');
+ var rows=[].slice.call(tb.querySelectorAll('tr'));dir[k]=!dir[k];
+ rows.sort(function(a,b){
+  var x=a.children[k].textContent.trim(),y=b.children[k].textContent.trim();
+  if(typ==='n'){x=parseFloat(x);y=parseFloat(y);x=isNaN(x)?-1e9:x;y=isNaN(y)?-1e9:y;return dir[k]?x-y:y-x;}
+  if(typ==='p'){x=pc(x);y=pc(y);return dir[k]?x-y:y-x;}
+  return dir[k]?x.localeCompare(y,'ja'):y.localeCompare(x,'ja');});
+ rows.forEach(function(r){tb.appendChild(r);});};});
+})();</script></div><div class="card wide"><h3>週次サマリー</h3><table><tr><th>週</th><th>距離km</th><th>本数</th><th>平均スコア</th></tr><tr><td>2026-W28</td><td>11.8</td><td>1</td><td>7.0</td></tr></table></div></div></section>
+  <section id="plan"><h1>サブエガ・ロードマップ</h1>
+<p><strong>目標:</strong> 2027年サブエガ（フルマラソン 2:50切り＝4:01/km・想定走行時間 約2時間49分）。本命①=西尾マラソン 1/17、本命②=2月下旬フル
+<strong>対象:</strong> ランナー ／ <strong>心拍基準:</strong> %HRR主体（HRmax 200 / 安静時 50 / HRR 150）。bpm換算 = 50 + 1.5 × %HRR
+<strong>最終更新:</strong> 2026年7月10日（用語・数値・相互参照を全面点検し統一。期分け5フェーズ・設定＋キャップ確定）</p>
+<p>この1冊が「これを見れば目標達成までの道のりがすべて分かり、あとは実行するだけ」の状態を作るための中核計画である。<strong>Ⅰ課題（なぜ）→ Ⅱ原則（考え方）→ Ⅲ期分け（全体の地図）→ Ⅳ実行（各行程の中身）→ Ⅴ本番と管理</strong> の順で、マクロ（なぜ・全体像）からミクロ（1本の練習）へズームしていく。迷ったらⅠに戻る。</p>
+<blockquote>
+<h2>🎯 このロードマップの目的</h2>
+<p><strong>LTを高めることが目的ではない。高めたLTをマラソンペースとして"使える"能力へ変換し、42.195kmを最後まで維持できる身体を作る。</strong>
+<strong>LT → MP → 42km。</strong> この一本の矢印に、火曜のLTも、週末のMペースロングも、補給も、すべてが紐づく。<strong>フェーズが進むほどLTの比重は下がり、MPの比重が上がる</strong>（期分けはⅢ）。</p>
+</blockquote>
+<hr />
+<h1>Ⅰ. 課題 — 敵と自分を知る</h1>
+<p>5年分の全練習ログと4レースのラップ分析から確定した事実に、計画のすべてを紐づける。ここが「なぜこの練習なのか」の出発点。</p>
+<p><strong>事実1: スピードの天井は証明済み、ただし今は要再構築。</strong> ハーフ1:18:42（2023）はフル2:44相当で、サブエガに必要な走力の潜在能力は証明済み。ただし2025年3〜12月がほぼ空白で、現在地はそこから低下している（＝2026年1月からの再構築期）。だからPhase 1で<strong>LT総力を戻すこと</strong>が最初の仕事になる——「天井は作り直せる」と分かっているのが強みだ。</p>
+<p><strong>事実2: 壁は距離ではなく時間（約2:05）に固定されている。</strong> 3レースとも、フィットネスに関係なく経過2時間5分前後で崩壊が始まった。崩壊中も心拍は頭打ち（心肺に余裕）、ピッチ維持のまま歩幅だけ最大24%低下。原因はグリコーゲン枯渇＋終盤の筋持久力。<strong>したがって本計画の主戦場は「速くなる練習」ではなく「落ちなくなる練習」と「補給」である。</strong></p>
+<p><strong>事実3: 閾値への適応が速い。</strong> 再構築期のLTペースは4ヶ月で約20秒/km改善。週2Qの現行構造で10〜11月にはピーク水準に届く見込みで、Qの増量は不要。</p>
+<p><strong>事実4: 高負荷ブロックの直後に崩れる履歴（2024/6、2025/3）。</strong> 月間400km台への深追いが引き金だった可能性が高い。月間上限350km・3週漸増+1週回復を構造的なルールとする。負荷の集中を避ける──自身の専門理論（理学療法士）を自分の計画に適用する。</p>
+<p><strong>事実5: 現在地。</strong> エアロビック効率はピークの約95%まで回復済み。ロング走のPa:HRドリフトは約15%（6月・無補給時）で、これが「壁」の練習版の姿。ドリフト5%以内が壁消滅のシグナルになる。</p>
+<hr />
+<h1>Ⅱ. 原則 — どう攻めるか</h1>
+<h2>コアとなる4つの理論</h2>
+<h3>1. 骨格に合わせた「ランニングエコノミー」の追求</h3>
+<p>疲労で動作パターンが崩れ代償動作（エラー動作）が出ると、パフォーマンス低下と故障に直結する。理学療法士の強みを活かし、自分の骨格特性に合ったフォームを感知・修正し、微細な炎症を自ら管理しながら、科学的に計算された上限の負荷を安全かつ最大効率で積み上げる。</p>
+<h3>2. 変数を統制する「ノルウェー式心拍管理（%HRR）」</h3>
+<p>毎週同じメニューを繰り返し、そのメニュー自体を「物差し（定規）」として固定することで、身体の微細な適応を継続的にサンプリングする。ターゲット強度（%HRR）を2つのゾーンに明確に分け、再現性の高い環境（トレッドミル・傾斜1.0%固定）でデータを蓄積する。ゾーンの実測ベースの再定義はⅣ-1（心拍ゾーン）に示す。</p>
+<h3>3. 毎週の積み重ねで作る「マッスル・デュラビリティ（筋肉の耐久性）」</h3>
+<p>35km以降で脚が止まる最大の原因は、心肺機能の低下ではなく、数万回の着地衝撃による活動筋（遅筋線維）の微細損傷と収縮力低下だ。週末の「徹底した低強度・時間管理ロングラン」がこの刺激の中心を担い、35km以降も崩れない耐久性を安全に培う。</p>
+<h3>4. 低強度8割・高強度2割（ポラライズド）</h3>
+<p>週の総走行時間を、約8割の低強度と約2割の質に振り、中間のグレーゾーンは排除する。両側は生理学的な<strong>役割分担</strong>であって、主従ではない。</p>
+<p><strong>低強度8割（有酸素の土台を作る）</strong> — 〜63%HRR（上限70%未満）に徹し、距離でなく「時間」で管理する。大量の低強度走は、ミトコンドリア密度・毛細血管・脂質代謝を高める総刺激を最大化し（PGC-1αを慢性的に活性化）、故障リスクを抑えたまま<strong>有酸素の土台＝LT1（有酸素閾値）を押し上げる</strong>。土台は量なしには作れないため、この8割が計画の背骨になる。</p>
+<p><strong>高強度2割（天井の下で叩く）</strong> — 質のセッションは<strong>乳酸2〜3.5mmolで刺激し、MLSS（4mmol・179bpm）は超えない</strong>。閾値インターバルは主に乳酸処理能力とLT2（＝天井）を引き上げる担当だ。<strong>なぜMLSSを叩かないか</strong>：①超えると疲労が指数関数的に増え翌日以降のボリュームを削る、②閾値適応は「量×頻度」が主ドライバーで、天井を叩く1本より閾値下を数多く積むほうが総適応が大きい、③限界手前で止めればフォーム（骨格コントロール）が崩れず、故障と代償動作を防げる。「速度はLT2以上・乳酸は溜めない」この乖離を狙うのがノルウェー式の要諦だ。</p>
+<h2>攻略の2本柱</h2>
+<p>Ⅰの診断（<strong>壁＝時間切れ＝燃料＋終盤の筋持久力</strong>）から、攻略は2本柱に集約される。</p>
+<ol>
+<li><strong>落ちない脚（特異的持久力）</strong> — 糖が減り疲れた脚でMPを出す練習＝週末のMペースロング（Ⅳ-4）。理論3（筋耐久）と理論4（二極化で質を確保）がこれを支える。</li>
+<li><strong>燃料（補給）</strong> — 壁の半分は燃料切れ。補給の再設計と腸トレで壁を後方へ押す（Ⅴ-1）。</li>
+</ol>
+<p><strong>LT（火・木）は"武器そのもの"ではなく、この2本柱を支える土台。</strong> 高めた武器（LT）を、①の練習でMPへ変換し、②の燃料で最後まで使い切る——これが「LT → MP → 42km」の実体だ。</p>
+<hr />
+<h1>Ⅲ. 期分け — いつ何をやるか（背骨）</h1>
+<p><strong>作る → 変える → 持たせる → 仕上げる → 立て直す。</strong> この動詞の連なりが計画の背骨。名前を見れば「今の自分が何をやるか」が一言で分かる。西尾（1/17）＝R-0を起点にカウントダウンする。</p>
+<h2>レースカレンダー</h2>
+<table>
+<thead>
+<tr>
+<th>日付</th>
+<th>レース</th>
+<th>位置づけ</th>
+<th>対1/17</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>10/25</strong></td>
+<td>金沢フル（3回目）</td>
+<td>復帰戦・3:15コントロール（42km持久力テスト。ミニ調整のみ・フルテーパーしない）</td>
+<td>R-12</td>
+</tr>
+<tr>
+<td><strong>12/13</strong></td>
+<td>ハーフ</td>
+<td>仕上げ判定（サブエガ最終ジャッジ）</td>
+<td>R-5</td>
+</tr>
+<tr>
+<td><strong>1/17</strong></td>
+<td>西尾フル</td>
+<td><strong>サブエガ本命①</strong></td>
+<td>R-0</td>
+</tr>
+<tr>
+<td><strong>2月下旬</strong></td>
+<td>フル</td>
+<td><strong>サブエガ本命②</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2>5フェーズ</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Phase</th>
+<th>名前</th>
+<th>やること（一言）</th>
+<th>LT / MP の比重</th>
+<th>期間</th>
+<th style="text-align: center;">対1/17</th>
+<th>レース</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>1</strong></td>
+<td><strong>LTを作る</strong></td>
+<td>LTそのものを戻す（乳酸2〜3.5mmol帯で量を積む）</td>
+<td>LT ██████ ／ MP ░</td>
+<td>7月〜9/20</td>
+<td style="text-align: center;">〜R-17</td>
+<td>—</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2</strong></td>
+<td><strong>LTをMPに変える</strong></td>
+<td>同じ強度のまま持続時間を伸ばし、LTをMPへ繋ぐ</td>
+<td>LT ███ ／ MP ███</td>
+<td>9/21〜11月中旬</td>
+<td style="text-align: center;">R-16〜9</td>
+<td>金沢 10/25</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3</strong></td>
+<td><strong>MPを42km持たせる</strong></td>
+<td>作ったLTをMPで何km使えるか。質の主役はMP特異ロング</td>
+<td>LT █ ／ MP ██████</td>
+<td>11月下旬〜12月下旬</td>
+<td style="text-align: center;">R-8〜3</td>
+<td>ハーフ 12/13</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4</strong></td>
+<td><strong>仕上げる（調整）</strong></td>
+<td>研いで鮮度化し、本番へ抜く（ボリューム減・刺激は短く残す）</td>
+<td>鮮度↑／量↓</td>
+<td>1月上旬〜1/17</td>
+<td style="text-align: center;">R-2〜0</td>
+<td>西尾 1/17</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>5</strong></td>
+<td><strong>立て直す（再調整）</strong></td>
+<td>西尾を最大の特異刺激とし、回復→Phase 3圧縮再演→短テーパー</td>
+<td>回復→再鋭化</td>
+<td>1/18〜2下旬</td>
+<td style="text-align: center;">—</td>
+<td>フル 2下旬</td>
+</tr>
+</tbody>
+</table>
+<pre><code>Phase1  LT ██████████  →  MP ▁          「作る」
+Phase2  LT ██████      →  MP ██████      「変える」
+Phase3  LT ██          →  MP ██████████  「持たせる」
+Phase4        研いで抜く（鮮度化）        「仕上げる」
+Phase5        立て直して2本目へ           「立て直す」
+</code></pre>
+<h2>各フェーズの狙い（補足）</h2>
+<ul>
+<li><strong>Phase 1「LTを作る」</strong>：再構築期の本人にとって、これは"維持"でなく本当に作る作業。ただし目標は「3:50をより速く」ではなく「<strong>同じ3:50をより低い心拍で・ドリフトさせずに</strong>」（＝天井を戻すが速さは追いかけない）。土台期ゴール＝Ⅴ-3のマイルストーン参照</li>
+<li><strong>Phase 2「LTをMPに変える」</strong>：同じ乳酸のまま持続時間を伸ばし、LTの出力をMPの時間へ繋ぐ。金沢（10/25）を"変換がどこまで進んだか"の実戦テストに使う</li>
+<li><strong>Phase 3「MPを42km持たせる」</strong>：質の主役はMP特異ロング。<strong>LT（火・木）は固定のまま"保つ"だけ＝天井をキープ</strong>（作りにいかない。抜くとMPが相対的にきつくなり、弱点＝終盤の歩幅低下が出やすい）。12/13ハーフで最終判定</li>
+<li><strong>Phase 4「仕上げる」</strong>：走力は落とさず走行時間だけ削る（本Ⅲ末のテーパールール）</li>
+<li><strong>Phase 5「立て直す」</strong>：西尾そのものを最大の特異刺激とみなし、回復→短い再鋭化→テーパーで2本目へ再ピーク。1本目に温存はしない</li>
+</ul>
+<p>負荷サイクルは全期間共通で<strong>3週漸増+1週回復</strong>。回復週は<strong>距離をピーク週の70〜75%（−25〜30%）に落とす</strong>（強度は保ち、量で調整）。回復週は「サボり」ではなく計画の一部。崩壊予防は回復週を深くすることではなく、①月間350km上限でピークを盛りすぎない、②回復週を必ず取る（飛ばさない）——の2点で担保する（2024/6・2025/3の崩壊はこの欠如が原因）。</p>
+<p><em>※ フェーズ内の週ごとの具体メニュー（漸増の刻み・本数）は、各ブロック入り口で実データ（報告パックのLTペース＠固定心拍など）を見て確定する。この期分け表は概念と時期の骨格であり、メニューは固定しない。</em></p>
+<h2>Phase 4「仕上げる」テーパーの本質ルール</h2>
+<p>走力（画質）は1mmも落とさず、走行時間（音量）だけを段階的に削り、疲労のみを完全除去する（指数関数型テーパリング）。R-3の総仕上げ（30km・M25km）を最後の大きな刺激とし、R-2から量を抜いていく。</p>
+<ul>
+<li>R-2週（週末＝MPロング21km｜M15km）: 週間距離 −25%。Q維持（LT-long 12分×3、LT-short 3分×6）。本番リズムのMPを最後にしっかり通す週</li>
+<li>R-1週（週末＝短く抜く・M少し）: −40〜45%。<strong>LT-shortは軽く（3分×4）〜抜く</strong>（疲労コストが高く本番リズムに直結しないため）。<strong>LT-long 12分×2でMPリズムだけ残し</strong>、流し/短い坂で鮮度を保つ</li>
+<li>レース週（R-0）: 合計20-25km。3日前に2km M＋流し数本。前日はオフか20分ジョグ</li>
+<li><strong>設定速度（強度）は原則レース4日前まで落とさない。削るのは本数・時間だけ</strong></li>
+<li>カーボローディング: 3日前から8-10g/kg/日。当日はスタート3時間前に約100g</li>
+</ul>
+<hr />
+<h1>Ⅳ. 実行 — 各行程の中身</h1>
+<p>Ⅲの地図（期分け）を、<strong>心拍ゾーン（物差し）→ 各メニュー（道具）→ フェーズ別の実行 → 週末ロングの漸増</strong> の順にズームダウンする。</p>
+<h2>Ⅳ-1. 心拍ゾーン（物差し・設定＋キャップ）</h2>
+<p>心拍ゾーンは、過去レースのFITデータ（フルベスト2:53:20・ハーフベスト1:18:42）の秒単位解析から、本人個人の乳酸-心拍関係を<strong>実測ベースで定義</strong>したもの。</p>
+<p><strong>実測アンカー:</strong></p>
+<ul>
+<li>MLSS（≒4mmol）≈ <strong>179bpm（86%HRR）</strong> ← ハーフ序盤8-20分の安定心拍</li>
+<li>マラソン強度（≒2〜2.5mmol、LT1のすぐ上）≈ <strong>163bpm（75%HRR）</strong> ← フル序盤10kmの巡航心拍</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>%HRR</th>
+<th>bpm換算</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回復ジョグ</td>
+<td>〜55%</td>
+<td>〜132</td>
+<td>完全に会話ペース。回復を買う日</td>
+</tr>
+<tr>
+<td>Easy走・ジョグ</td>
+<td>〜63%</td>
+<td>〜145</td>
+<td>上限70%未満（155）。超えたら気づくための警報線</td>
+</tr>
+<tr>
+<td>ロング</td>
+<td>63〜70%</td>
+<td>145〜155</td>
+<td>長時間ドリフト込みの上限</td>
+</tr>
+<tr>
+<td>プログレッシブ仕上げ</td>
+<td>70〜77%</td>
+<td>155〜165</td>
+<td>Steady帯。「疲れた脚で出力を上げる」導入</td>
+</tr>
+<tr>
+<td>M区間の入り（Phase 2以降）</td>
+<td>〜75%</td>
+<td>〜163</td>
+<td>フル序盤実測。ドリフト込みで176まで許容</td>
+</tr>
+<tr>
+<td><strong>火曜・LT-long</strong></td>
+<td>設定74〜77%／キャップ79%</td>
+<td>設定161〜166（基準163）／キャップ168</td>
+<td>乳酸2〜2.5mmol。量を稼ぐ長いインターバル。マラソン特異性</td>
+</tr>
+<tr>
+<td><strong>木曜・LT-short</strong></td>
+<td>設定79〜83%／キャップ85%</td>
+<td>設定168〜175（基準172）／キャップ178</td>
+<td>乳酸2.8〜3.5mmol。速い動きを保つ短いインターバル。天井（MLSS）は叩かない</td>
+</tr>
+<tr>
+<td>MLSS（参考・叩かない天井）</td>
+<td>86%</td>
+<td>179</td>
+<td>ハーフ序盤の実測。超えると疲労が指数的に増える</td>
+</tr>
+<tr>
+<td>坂道</td>
+<td>心拍管理しない</td>
+<td>—</td>
+<td>短レップは心拍が遅れるためRPE管理</td>
+</tr>
+</tbody>
+</table>
+<p><strong>設定＝狙う帯／キャップ＝超え続けたら速度を1段落とす天井。</strong> 守るのは「<strong>イージーは徹底的に楽</strong>」「<strong>質は2つともMLSS（179）を超えない</strong>」の2点だけ。</p>
+<h2>Ⅳ-2. 各メニューの目的と実行仕様</h2>
+<h3>1. LT（火・木の実験室：LT-long／LT-short／ペーサー）</h3>
+<p><strong>LT-long（火曜朝・TM 1%）</strong> — 12分×3・つなぎ2分ジョグ（戻りHRは64-73%HRR＝146-160bpm目安）、W-up 10分。<strong>設定 74-77%HRR（161-166bpm、基準163）／キャップ 79%（168bpm、持続的に超えたら速度を1段落とす）</strong>。乳酸2〜2.5mmolの「乳酸を溜めず量を稼ぐ」長いインターバルで、マラソンのレースペース特異性（4:01-4:05/km）も兼ねる。運用は下記「<strong>LT運用ルール</strong>」に従う（心拍を上限の監視役、ペースを調整レバーにする）。</p>
+<p><strong>LT-short（木曜・TM 1%）</strong> — 3分×8〜10・レスト60秒（緩ジョグ、戻りHRは64-73%HRR＝146-160bpm目安。下記LT運用ルール参照）、W-up 10分。<strong>設定 79-83%HRR（168-175bpm、基準172）／キャップ 85%（178bpm＝MLSS179のすぐ下、持続的に超えたら速度を1段落とす）</strong>。狙いは「乳酸を2.8〜3.5mmolに抑えつつ速度はLT2以上に保つ」乖離で、ノルウェー式400m型と同じ思想。<strong>天井（MLSS/179bpm）は叩かない</strong>。レップを3分と短くすることで各本を速く入れても心拍が177以下に収まりやすい（本人がベスト期に主戦とした構成）。屋外でも同構成（3分×8〜10）で実施。</p>
+<p><strong>LT運用ルール（LT-long / LT-short 共通）</strong> — 考え方は両者同じ：<strong>心拍を"上限の監視役"（設定帯＋キャップ）に置き、ペースを調整レバーとしてレップごとに設定帯へ寄せる</strong>。乳酸を測らない代わりに心拍を毎レップ読んでペースを微調整する＝簡易・乳酸ガイド走。</p>
+<ul>
+<li><strong>判断はプラトー心拍で</strong>（ピークでなく後半のみ：LT-long＝後半6分／LT-short＝後半90秒）。1本目が設定帯以下なのは当然（心拍は遅れて上がる）</li>
+<li><strong>レップ間で補正</strong>：プラトーが設定帯より下＋余裕あり→次本を上げる／設定帯内→維持／キャップに張り付く→次本を下げる。中盤〜終盤が設定帯に入り、最終本のプラトーが設定帯上端〜キャップ手前に収束するのが理想</li>
+<li><strong>レップ内はペース一定</strong>（振り返り・週次比較のため）。例外は、心拍がキャップをはっきり超えて持続したときだけ1段下げる（瞬間的な跳ねには反応しない）</li>
+<li><strong>つなぎ／レストの戻りHR＝64-73%HRR（146-160bpm＝ジョグ上〜LT1）</strong>。狙いは"クリアするが冷やさない"：LT1（≒160bpm）より下で乳酸を掃きつつ、ジョグ以下（〜145）まで落として系を冷やさない（次本の立ち上がりロス＝回復しすぎを防ぐ）。LT-longは2分あるので窓の下側、LT-shortは60秒なので上側に自然に乗る。終盤にLT1を少し超えるのは疲労の自然な出方。<strong>79%（168bpm・設定帯）に張り付いて戻らない＝産生&gt;処理＝攻めすぎ</strong>の赤信号</li>
+<li><strong>悪い日はペースを落として構わない</strong>：いつものペースがキャップを割る日は、その日の状態を映すデータ。落とすのは失敗ではなくオーバートレーニングの自動回避</li>
+<li><strong>進歩の計器</strong>：毎回「レップごとのペース＋プラトー心拍」を記録し、週をまたいで「同じプラトー心拍でペースが上がったか」を見る</li>
+<li><strong>違いは実務だけ</strong>：LT-longはレップが長く心拍が安定するので心拍フィードバックが効きやすい。LT-shortは3分では心拍が上がりきらないので、キャップ＋レップ間の右肩上がり傾向（例:1本目163→最終本176）で読む</li>
+<li><strong>週の閾値帯の総量</strong>：LT-long 36分＋LT-short 24-30分＋夜ペーサー分で十分（1セッション20-30分・週60-70分が適応の必要十分量。それ以上は回復コストだけ増える）</li>
+<li>乳酸は測れる機会があれば1回測ると関係が固定できるが、基本は測れない前提。日々の「ペース＠プラトー心拍」の記録の蓄積で基準を掴む</li>
+</ul>
+<p><strong>ペーサー業務（火曜夜）</strong> — 8-10km、上限79%HRR（168bpm）。火曜は朝夕で閾値下約60分の「ダブル閾値日」（ノルウェー式のダブルスレッショルド構造）。夜が上限を超える見込みの日は朝を12分×2に減らし、日の総量を一定に保つ。</p>
+<h3>2. イージー走</h3>
+<p><strong>Easy走</strong> — 〜63%HRR（145bpm）を基準にペース不問。上限は70%未満（155bpm＝"警報線"、超えたら「上げすぎ」と気づく）。「今日は速いのに63%以下」の日が増えることが土台の成長。</p>
+<h3>3. ロング・プログレッシブ</h3>
+<p><strong>Easyロング</strong> — 有酸素の器を広げる長時間走。63-70%HRR・<strong>時間管理</strong>。25-35km（2.5-3h以内／週の25-35%）。毎回Pa:HRドリフト率を記録──壁の計器（11月末までに25km以上・給水ありで5%以内）。補給は期分け（Ⅴ-1）。</p>
+<p><strong>プログレッシブ・ミディアムロング</strong> — 18-22km。前半67%HRR以下 → ラストを70-77%（Steady帯）へビルドして「強く終わる」。狙いは「疲れた脚で出力を上げる」動作＋<strong>train-low（低糖状態での仕上げ）</strong>で脂質代謝・糖節約を叩くこと、そしてPhase 1→2の橋（仕上げをM感覚まで段階的に上げる）。補給はあえて軽め。</p>
+<h3>4. MPトレーニング</h3>
+<p>目的は2段：<strong>capacity（MPの天井＝巡航能力）</strong> と <strong>durability（床＝疲労・糖枯渇下でもMPを維持）</strong>（補完関係）。フレッシュなMP capacityは火曜LT-longが毎週供給するので、週末は<strong>疲労下の特異刺激</strong>に集中する（フレッシュな単独MPインターバルは置かない）。LT-short（MPより速い"上から"）も天井を支える＝Canovaの"両側から挟む"。</p>
+<p><strong>2つの形</strong>（変化走 → 連続 の順に進める）：</p>
+<ul>
+<li><strong>MP変化走</strong> — easy先行の後半にMPを置く（つなぎ＝floatは1km固定・止まらず走り続ける）。糖使用・やや疲労下でのMP維持。レップは3km→5kmと伸ばす</li>
+<li><strong>MPロング（連続後半MP）</strong> — floatを消し後半を連続に。疲労下のMP維持＝durabilityの核。最終形はマラソンペース走（レースシム）</li>
+</ul>
+<p><strong>共通ルール：</strong></p>
+<ul>
+<li><strong>M区間は必ず終盤</strong>（糖が減り疲れた脚でMPを出すのが最も特異的な刺激。序盤M型では買えない）</li>
+<li><strong>総距離は30km前後を上限</strong>（2.5-3h以内・easy先行部で調整）。金沢42kmだけ別格</li>
+<li><strong>アンカーを期分け</strong>：暑い時期は<strong>心拍基準</strong>（M区間HR 入り163→ドリフト176・上限176、ペースは暑さ次第）／涼しい時期・本番近くは<strong>ペース基準</strong>（4:01-4:05、心拍は上限176を超えないよう見る）。同じMP-HRで4:01が踏める＝変換完了のサイン</li>
+<li>ドリフト約+8.4bpm/時。序盤163→ゴール前176-180が正常、早期の176到達は異常サイン</li>
+<li><strong>週ごとの具体（距離・レップ・設定）はⅣ-4を参照</strong></li>
+<li>補給：腸トレ（Ⅴ-1）</li>
+</ul>
+<h3>5. 坂道・流し</h3>
+<p><strong>流し</strong> — 平地で4〜6本×15-20秒、フル回復。RE（ランニングエコノミー）・神経筋の鋭さ・姿勢の維持を担う低コストな習慣。狙いはスピードでなく「地面を後ろに押す」感覚。（短い坂の役割はこれで代替＝坂の独立項目にしない）</p>
+<p><strong>坂道（補強的・登り長め＋下りの2種）</strong> — 弱点（終盤の歩幅低下）を"走りの中で"叩く補強刺激。筋持久・神経筋はジム/ドリル（自分の裁量）と分担し、坂は"走動作での特異的耐久"を担う。新奇刺激＋再構築中のため<strong>少量から段階的に</strong>導入。</p>
+<ul>
+<li><strong>登り60〜90秒 × 6〜10本＝筋持久（strength endurance）</strong> — 疲労下で"押し続ける脚"＝歩幅（ストライド長）を保つ主戦力。勾配4〜6%、つなぎは歩き〜ジョグで下って完全回復（乳酸を溜めない）。慣れれば2分まで可。RPE管理（「LT-shortよりややきつい、最後の1本も同フォームで終われる」）。屋外の坂 or TM傾斜6-8%。根拠：Canova/Lydiardのコーチング理論＋マラソン終盤の末梢疲労研究</li>
+<li><strong>下り20秒 × 4〜8本＝離心耐性（eccentric durability）</strong> — 着地・ブレーキに耐える＝歩幅"崩壊"の直接の保険（失速機序＝歩幅−24%にドンピシャ）。緩い勾配−2〜3%、つなぎは歩き/ジョグで上り返す。<strong>技術が主：ブレーキせず転がる・ピッチ維持・接地を潰さない</strong>。屋外のみ・導入4本から。繰り返し効果（RBE, McHugh 2003）で少量から損傷耐性がつく（DOMSは2日遅れ）</li>
+</ul>
+<h2>Ⅳ-3. フェーズ別の実行（週間構造と進行）</h2>
+<p>週の骨格（曜日の役割）は全期ほぼ共通。<strong>ロング・坂道・MPの"中身と頻度"がフェーズで変わる</strong>（フェーズ別は下記）。</p>
+<table>
+<thead>
+<tr>
+<th>曜日</th>
+<th>役割（週の骨格・全期共通）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>月</td>
+<td>休養 or Easy 8-10km</td>
+</tr>
+<tr>
+<td>火</td>
+<td><strong>ダブル閾値日</strong>: 朝 LT-long 12分×3（上限79%/168） / 夜 ペーサー8-10km（上限79%）</td>
+</tr>
+<tr>
+<td>水</td>
+<td><strong>回復日</strong>: ジョグ≤8km（55%以下） or 休養</td>
+</tr>
+<tr>
+<td>木</td>
+<td><strong>LT-short</strong> 3分×8〜10（上限85%/178） or 練習会</td>
+</tr>
+<tr>
+<td>金</td>
+<td>Easy 8-10km</td>
+</tr>
+<tr>
+<td>土</td>
+<td>Easy 12-14km ＋ 坂道／流し（フェーズ別）</td>
+</tr>
+<tr>
+<td>日</td>
+<td>ロング（フェーズ別に内容が変わる。Phase 2-3は M週=MPトレーニング／E週=Easyロング）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>火曜の夜が79%（168bpm）を超える見込みの日は朝を12分×2に減らす</li>
+<li>練習会に出た週は、内容にかかわらずその週の LT-short 枠を消化したものとみなす。追加の LT-short で取り返さない</li>
+<li><strong>火・木のLTは全期固定の"実験室"</strong>（年間同一で適応をサンプリング）。MP特異化は平日で行わず週末が担う。回復週・テーパーは量だけ減らす。水木金がジョグ連発にならないよう、火・木・日にリズムの山を立てる</li>
+</ul>
+<p><strong>坂道の配置ルール（全フェーズ共通）</strong>：坂は土曜（翌日曜はロング）。<strong>E週土曜＝坂／M週土曜＝流しのみ</strong>（日曜MPロングの脚を残す）。キーロング前日に重い坂を置かない。下りは高DOMS（2日遅れ）なので、<strong>最初の1回（プライマー）を金沢後の回復期に</strong>入れてRBEを確立し、以降はE週土曜に少量。</p>
+<h3>Phase 1（土台・7月〜9/20）</h3>
+<ul>
+<li><strong>週末ロング（日）</strong>：Easyロングが基本。<strong>7月は毎週</strong>（時間を漸増、25-28kmへ）、<strong>8-9月はプログレッシブ（18-22km）と隔週交互</strong>。補給は軽め（train-low）</li>
+<li><strong>プログレッシブの進行</strong>：8月から、<strong>18-22km（18→20→22kmと段階的に）</strong>。仕上げも段階化（ラスト3-4km@70-73% → 5-6km@73-75%）、<strong>8/30と9/13の2回</strong>ラスト6km@75%（163・M感覚）＝Phase 2の予行</li>
+<li><strong>坂道（土）</strong>：登り長めのみ（下りはまだ）。本数を段階的に（6→8→10本）。翌日がプログレッシブの強め仕上げの週は流しに落とす</li>
+<li><strong>LT</strong>：火 12分×3／木 3分×8-10（フル）／MPはまだ行わない</li>
+</ul>
+<h3>Phase 2（変換・9/21〜11月中旬）</h3>
+<ul>
+<li><strong>週末ロング（日）</strong>：<strong>M週＝MPトレーニング</strong>（MP変化走。M区間を3km→5kmと伸ばす）／<strong>E週＝Easyロング30-35km</strong>。隔週交互。アンカーは前半（暑い）は心拍基準 → 涼しくなる後半はペース基準へ</li>
+<li><strong>坂道（土）</strong>：<strong>E週＝登り長め／M週＝流しのみ</strong>。下りはまだ入れない。ただし<strong>金沢後の回復期（R-11）に下りプライマーを1回</strong>（RBE確立）</li>
+<li><strong>金沢 10/25 ＝ 42km実戦テスト</strong>（R-12・その週のロングを兼ねる）</li>
+<li><strong>LT</strong>：固定</li>
+</ul>
+<h3>Phase 3（特異・11月下旬〜12月下旬）</h3>
+<ul>
+<li><strong>週末ロング（日）</strong>：Phase 2と同じ<strong>隔週交互を継続</strong>。M週＝MPトレーニング（<strong>MPロング＝連続後半MP。R-8リハーサル → R-3総仕上げ</strong>＝Ⅳ-4）／E週＝Easyロング（＋3週漸増1週回復）</li>
+<li><strong>坂道（土）</strong>：<strong>E週＝下り20秒（RBE後・4-8本）＋登りは維持／M週＝流しのみ</strong>（下りはE週土曜に。日〜月の軽い張り程度で火曜LTまでに回復）</li>
+<li><strong>LT</strong>：固定（保つだけ）</li>
+<li><strong>判定ハーフ 12/13</strong></li>
+</ul>
+<h3>Phase 4（仕上げ・R-2〜0）</h3>
+<ul>
+<li>テーパー（Ⅲ末のルール）</li>
+<li><strong>LT-short抜く</strong>、LT-long 12分×2でMPリズムだけ維持</li>
+<li>坂道は抜く（流しのみで鮮度）</li>
+</ul>
+<h2>Ⅳ-4. 週末ロングの漸増（8月〜本番）</h2>
+<p>週末ロングは「8月プログレッシブ → 9月M感覚 → 変化走 → 連続MP（リハーサル）→ 判定ハーフ → 総仕上げ」で一本の連続した流れ。「2:05の壁」を42kmの外へ押し出す心臓部。<strong>M区間を終盤に置く理由</strong>：糖が減り脚が疲れた状態でMPを出すことが壁を後退させる最も特異的な刺激であり、序盤M型では買えない。数字はすべて目安（フェーズの進捗・当日の状態で柔軟に）。</p>
+<h3>週末カレンダー（8月〜本番）</h3>
+<p><strong>Phase 1（土台・8月〜9/20）— プログレッシブ／Easyロングを隔週交互＋回復週</strong></p>
+<table>
+<thead>
+<tr>
+<th>週</th>
+<th>週末ロング（目安）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8/2</td>
+<td>プログレッシブ 18km（ラスト3-4km@70-73%）</td>
+</tr>
+<tr>
+<td>8/9</td>
+<td>Easyロング</td>
+</tr>
+<tr>
+<td>8/16</td>
+<td>プログレッシブ 20km（ラスト4-5km@72-75%）</td>
+</tr>
+<tr>
+<td>8/23</td>
+<td>Easyロング（回復）</td>
+</tr>
+<tr>
+<td>8/30</td>
+<td>プログレッシブ 22km（ラスト6km@75%＝<strong>M感覚</strong>）</td>
+</tr>
+<tr>
+<td>9/6</td>
+<td>Easyロング</td>
+</tr>
+<tr>
+<td>9/13</td>
+<td>プログレッシブ 22km（ラスト6km@75%＝<strong>M感覚</strong>）</td>
+</tr>
+<tr>
+<td>9/20</td>
+<td>Easyロング（回復）← <strong>Phase 1締め</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Phase 2-3（9/27〜）— 変化走→連続、M週/E週を隔週交互、金沢・ハーフを内包</strong></p>
+<table>
+<thead>
+<tr>
+<th>週</th>
+<th>週末ロング</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-16（9/27）</td>
+<td><strong>MP変化走 26km</strong>｜easy10km → M3km×4（float1km）</td>
+</tr>
+<tr>
+<td>R-15（10/4）</td>
+<td>Easyロング</td>
+</tr>
+<tr>
+<td>R-14（10/11）</td>
+<td><strong>MP変化走 26-30km</strong>｜easy10km → M3km×4〜5（float1km）</td>
+</tr>
+<tr>
+<td>R-13（10/18）</td>
+<td>Easyロング（回復）</td>
+</tr>
+<tr>
+<td>R-12（10/25）</td>
+<td><strong>金沢42km</strong>（3:15コントロール・実戦テスト）</td>
+</tr>
+<tr>
+<td>R-11（11/1）</td>
+<td>Easyロング（回復）＋<strong>下りプライマー</strong></td>
+</tr>
+<tr>
+<td>R-10（11/8）</td>
+<td><strong>MP変化走 28km</strong>｜easy10km → M5km×3（float1km）</td>
+</tr>
+<tr>
+<td>R-9（11/15）</td>
+<td>Easyロング</td>
+</tr>
+<tr>
+<td>R-8（11/22）</td>
+<td><strong>MPロング 30km</strong>｜easy12km → M18km（リハーサル）</td>
+</tr>
+<tr>
+<td>R-7（11/29）</td>
+<td>Easyロング（回復）</td>
+</tr>
+<tr>
+<td>R-6（12/6）</td>
+<td><strong>MPロング 18km</strong>｜easy8km → M10km（ハーフ前）</td>
+</tr>
+<tr>
+<td>R-5（12/13）</td>
+<td><strong>判定ハーフ</strong>（目標1:19:30以内）</td>
+</tr>
+<tr>
+<td>R-4（12/20）</td>
+<td>Easyロング（回復）</td>
+</tr>
+<tr>
+<td>R-3（12/27）</td>
+<td><strong>MPロング 30km</strong>｜easy5km → M25km（総仕上げ・ドリフト5%以内）</td>
+</tr>
+<tr>
+<td>R-2（1/3）</td>
+<td><strong>MPロング 21km</strong>｜easy6km → M15km</td>
+</tr>
+<tr>
+<td>R-1（1/10）</td>
+<td>短く抜く（M少し）</td>
+</tr>
+<tr>
+<td>R-0（1/17）</td>
+<td><strong>西尾フル（本番）</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>MPの走り方（設定）</h3>
+<p><em>float（フロート）＝変化走のつなぎ区間を、止まらず・歩かず「軽く流して走り続ける」こと。完全回復させず、MPより少し遅いだけで転がす（Canovaの"走る回復"）。</em></p>
+<p><strong>MP変化走（10月・暑い）＝心拍基準</strong></p>
+<ul>
+<li>MP区間の心拍：入り〜163（75%）→ ドリフトで168-176、<strong>上限176</strong></li>
+<li>ペースは心拍任せ（暑いと4:05-4:15でも可）</li>
+<li><strong>float</strong>：MP+30-50秒（4:40-5:00/km）で走り続ける。<strong>心拍は10bpm程度しか落とさない</strong>（155-165のまま次のMPへ）</li>
+<li>easy先行：63-70%HRR（145-155bpm）</li>
+</ul>
+<p><strong>MPロング（連続・11月〜・涼しい）＝ペース基準</strong></p>
+<ul>
+<li>MP区間のペース：<strong>4:01-4:05/km（一定）</strong></li>
+<li>心拍は<strong>176を超えないよう見る（上限）</strong>。序盤163→終盤176-180が正常、早期の176到達は異常サイン</li>
+<li>easy先行：63-70%HRR（145-155bpm）</li>
+</ul>
+<h3>運用メモ</h3>
+<ul>
+<li>悪天候・体調で1本飛んだら<strong>追いかけない</strong>。次の予定に進む</li>
+<li>2週連続でクオリティにしない（Q/E/Q/Eのリズム）。回復週は省略しない</li>
+<li>補給（腸トレ）は10月40g/hから始め、総仕上げ55g/hへ（Ⅴ-1）。金沢・R-8・R-3は本番同一の補給リハを兼ねる</li>
+</ul>
+<hr />
+<h1>Ⅴ. 本番と管理</h1>
+<h2>Ⅴ-1. 補給戦略</h2>
+<h3>なぜ補給が最優先課題なのか</h3>
+<p>過去3レース（2:57:08、2:59:00、2:53:20）のラップ分析から、失速の開始点は距離ではなく経過時間およそ2時間5分に固定されている。フィットネスが向上してもこの時刻は動かず、崩壊中も心拍は頭打ち（心肺に余裕）、ピッチは維持されるのに歩幅だけ最大24%低下する。グリコーゲン枯渇＋終盤の筋持久力低下の典型パターンだ。</p>
+<p>従来の補給（12km・ハーフ過ぎ・30km過ぎ・35km過ぎの計3〜4本）は実効26〜35g/hで推奨量の半分以下。しかも3本目（約1:58）は吸収ラグ（20〜30分）で壁の時刻に間に合っていなかった。壁と戦えていたのは最初の2本（約50g）のみ。<strong>壁は「距離の壁」ではなく「燃料の時間切れ」。補給の再設計だけで壁を数km後方へ押し出せる。</strong></p>
+<h3>設計方針</h3>
+<ul>
+<li>目標摂取量: 合計 約55g/h（ジェル約45g/h+スポーツドリンク約10g/h）</li>
+<li>胃腸トラブル歴（4本摂取時）があるため、65g/h超は狙わない</li>
+<li>壁が来る前に入れ終える: 実効性のある最終ジェルは1:50までに配置</li>
+<li>前半から等間隔: 終盤の連投は腸への負荷集中を招く。30分間隔で分散</li>
+<li>距離ではなく経過時間で管理する（時計のアラート設定を推奨）</li>
+</ul>
+<h3>レース本番プラン</h3>
+<p><strong>前日〜スタート前:</strong> 前日カーボローディング 8〜10g/kg（体重60kgなら480〜600g）。当日はスタート3時間前に炭水化物約100gの朝食（消化に慣れたもの）。スタート直前の新しい試みは一切しない。</p>
+<p><strong>レース中（ジェル5本+条件付き6本目）:</strong></p>
+<table>
+<thead>
+<tr>
+<th>経過時間</th>
+<th>補給</th>
+<th>銘柄</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:25</td>
+<td>ジェル①</td>
+<td>carbエナジージェル</td>
+<td>吸収ラグを見越して早めに開始</td>
+</tr>
+<tr>
+<td>0:55</td>
+<td>ジェル②</td>
+<td>carbエナジージェル</td>
+<td></td>
+</tr>
+<tr>
+<td>1:25</td>
+<td>ジェル③</td>
+<td>carbエナジージェル</td>
+<td></td>
+</tr>
+<tr>
+<td>1:50</td>
+<td>ジェル④</td>
+<td>モルテン CAF100</td>
+<td>カフェインの効き始め（30〜45分後）が旧・壁地点〜ラストに重なる</td>
+</tr>
+<tr>
+<td>2:15</td>
+<td>ジェル⑤</td>
+<td>モルテン GEL100</td>
+<td>胃が疲れる後半は吸収に優しいものを配置</td>
+</tr>
+<tr>
+<td>2:35</td>
+<td>ジェル⑥（条件付き）</td>
+<td>モルテン GEL100</td>
+<td>2:15時点で胃が完全に平気なら摂取。少しでも違和感があればスキップしドリンクのみに切替</td>
+</tr>
+<tr>
+<td>全給水所</td>
+<td>スポーツドリンク</td>
+<td>—</td>
+<td>従来通り毎回。約10g/hの上乗せ</td>
+</tr>
+</tbody>
+</table>
+<p>合計: 125g（⑥摂取時150g）+ドリンク = 実効約55g/h。携行は前半用3本と後半用（モルテン）を分けて収納し取り違えを防ぐ。</p>
+<h3>腸トレーニング計画（2026年10月〜12月）</h3>
+<p>腸の吸収能力は訓練で向上する。10月以降のMペースロングはすべて補給リハーサルを兼ねる。</p>
+<ul>
+<li>開始（10月上旬）: 40g/hから。練習ではコスト削減のためマルトデキストリン粉末の自作ドリンク（水+少量の塩・クエン酸）で代替可。腸トレ効果はジェルとほぼ同等</li>
+<li>漸増ルール: ロング2〜3回ごとに5g/hずつ引き上げる。吐き気・差し込み・膨満感が出たら増量を止め、同じ濃度に2回とどまってから再開</li>
+<li>11月末の30km走（R-8・M18km）: 本番と完全同一（銘柄・タイミング・携行方法・ウェア）でリハーサル</li>
+<li>12月下旬の総仕上げ走（R-3・30km・M25km）: 最終リハーサル。55g/hを無症状でこなせたら本番仕様の完成</li>
+<li><strong>練習で一度も試していないものはレースで使わない</strong></li>
+</ul>
+<h3>補給の判断基準</h3>
+<ul>
+<li>55g/hを12月（総仕上げR-3）までに無症状で達成 → 本番プランをそのまま実行</li>
+<li>漸増が50g/hで頭打ち → ジェル⑥を廃止し5本+ドリンク重視（約50g/h）で確定</li>
+<li>レース中に胃の違和感 → ジェルを止めてドリンクのみに切替。無理に押し込まない</li>
+</ul>
+<h2>Ⅴ-2. レース当日の運用</h2>
+<p><strong>ペーシング: 4:01-4:03のイーブン、前半貯金は全面禁止。</strong> 2023年は2:46ペースで31km走って2:53に終わった。貯金走は糖の消費を不釣り合いに増やし、壁を自分で早める。序盤の貯金走を断つことは補給戦略の一部である。</p>
+<p><strong>心拍ガイド:</strong> 〜10kmは79%HRR以下（168）、〜30kmは84%以下（176）、35km以降は解放。この「〜10km・168以下」はフル序盤の実測（163bpm巡航）と一致する規律。</p>
+<p><strong>補給:</strong> Ⅴ-1の通り。ジェル5本を30分間隔（0:25/0:55/1:25/1:50=モルテンCAF/2:15=モルテン）+全給水でスポドリ。6本目（2:35）は胃が完全に平気な場合のみ。</p>
+<p><strong>32km地点は「旧・壁」の通過確認ポイント。</strong> 補給と練習が機能していれば、ここで歩幅が保たれているはず。時計のペースより「地面を押せている感覚」を確認する。</p>
+<h2>Ⅴ-3. 計器盤と評価基準</h2>
+<h3>毎週見る数字は3つだけ</h3>
+<ol>
+<li><strong>TM同一速度での心拍</strong>（週次・LT-long/LT-short で自動取得）──下がり続けていればフィットネスは前進中</li>
+<li><strong>ロング走のPa:HRドリフト率</strong>（隔週）──11月末までに25km以上・給水ありで<strong>5%以内</strong></li>
+<li><strong>マイルストーン判定</strong>──下表</li>
+</ol>
+<h3>LT評価の3指標（時系列データがある場合）</h3>
+<p>各本の単純平均心拍は立ち上がり（最初の2〜3分）を含むため構造的に過小評価になる。報告パック・FITファイル・心拍グラフ画像など時系列由来のデータがある場合は以下で評価する。</p>
+<ul>
+<li><strong>立ち上がり時間</strong>: レップ開始からゾーン下限到達までの秒数。短縮=適応の前進、急な延長=疲労サイン</li>
+<li><strong>ゾーン滞在率</strong>: レップ中に設定帯（火曜74-77%／木曜79-83%）に滞在した時間の割合。「設定に入れたか」の判定はこれで行う</li>
+<li><strong>プラトー心拍</strong>: レップ後半のみの平均（12分レップは後半6分、3分レップは後半90秒）。キャップ（火曜79%=168／木曜85%=178）との比較はプラトー心拍で行う。1本目の低さを未達と評価しない</li>
+</ul>
+<h3>合格ラインとマイルストーン</h3>
+<ul>
+<li>火曜・LT-long: レースペース（4:01〜4:05/km）を設定帯（74-77%/161-166、基準163）で12分×3本、淡々と巡航</li>
+<li>木曜・LT-short: 3:45〜3:50/km（15.5〜16.0km/h）を設定帯（79-83%/168-175）で、キャップ178を超えず3分×8本、速い動きを保って完遂</li>
+<li>ロング: Pa:HRドリフト率5%以内（11月末まで・25km以上・給水あり）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>時期</th>
+<th>判定</th>
+<th>合格ライン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8月末</td>
+<td>Easy走</td>
+<td>5:15/km @ 58%HRR（137bpm）以下</td>
+</tr>
+<tr>
+<td>9月中旬</td>
+<td>TM校正テスト</td>
+<td>TMとトラックで同一の LT-long プロトコル→換算係数を確定</td>
+</tr>
+<tr>
+<td>9月下旬</td>
+<td>トラック LT-short 2000m×4（r90秒）</td>
+<td>4:00/km @ 85%HRR（178bpm）以内。<strong>Phase 2（変える）突入の関門</strong></td>
+</tr>
+<tr>
+<td>11月末</td>
+<td>リハーサル走30km（R-8）</td>
+<td>ラスト18km @4:03、補給本番同一で無症状</td>
+</tr>
+<tr>
+<td>12月中旬</td>
+<td>ハーフ判定レース（R-5）</td>
+<td>1:19:30以内</td>
+</tr>
+<tr>
+<td>12月下旬</td>
+<td>総仕上げ走30km（R-3）</td>
+<td>25km M @4:00-4:03、ドリフト5%以内、55g/h完遂</td>
+</tr>
+</tbody>
+</table>
+<h3>最終判定（12月中旬のハーフ結果で確定）</h3>
+<ul>
+<li>1:19:30以内 → サブエガプランをそのまま実行（4:01-4:03イーブン）</li>
+<li>1:19:31〜1:21:00 → 4:05/km（2:52ペース）で入り、30km地点で余裕があれば上げる</li>
+<li>それ以下 → 今回はPB更新（2:53切り）に目標を置き換え、サブエガは春に持ち越す</li>
+</ul>
+<h2>Ⅴ-4. 崩壊予防ルール（2024/6・2025/3を繰り返さないために）</h2>
+<ol>
+<li>月間350kmを超えない。超えそうな週はEasyを削る（Qは削らない）</li>
+<li>仕事（職場）が重なる週は、<strong>Qを守りEasyを削る</strong>を機械的に適用</li>
+<li>違和感が2日続いた部位があれば、その週のQを1本Easyに置換。「1本飛ばす勇気」の期待値はプラス</li>
+<li>回復週は省略しない。予定通り抜く</li>
+<li>飛んだ練習は追いかけない。計画は前にしか進まない</li>
+</ol></section>
+</div>
+<script>
+function tab(id){for(const s of document.querySelectorAll('section'))s.classList.toggle('on',s.id===id);
+for(const b of document.querySelectorAll('nav button'))b.classList.toggle('on',b.dataset.t===id);
+window.scrollTo(0,0);}
+</script>
+</body></html>

@@ -1,91 +1,93 @@
 <!DOCTYPE html><html lang="ja"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="サブエガ">
-<meta name="theme-color" content="#0d2b45">
-<title>サブエガ運用</title><style>
-:root{--fg:#1a1f26;--mut:#667;--line:#e0e6ee;--acc:#1f6feb}
-*{box-sizing:border-box}
-body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;color:var(--fg);background:#f4f7fb;margin:0;line-height:1.7}
-.wrap{max-width:820px;margin:0 auto;padding:0 14px 60px}
-header{position:sticky;top:0;background:#0d2b45;color:#fff;z-index:10;padding:10px 14px 0}
-header .t{font-size:16px;font-weight:700}
-header .s{font-size:11px;color:#9fc0e0;margin-bottom:8px}
-nav{display:flex;gap:6px}
-nav button{flex:1;border:none;background:#124a7a;color:#cfe0f3;font-size:14px;padding:10px 4px;border-radius:8px 8px 0 0;cursor:pointer;font-weight:700}
-nav button.on{background:#f4f7fb;color:#0d2b45}
-section{display:none;padding-top:16px}
+<meta name="apple-mobile-web-app-title" content="マラソンログ">
+<meta name="theme-color" content="#0f1b2e">
+<title>マラソンログ</title><style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#1a2230;background:#eef2f7;overflow-x:hidden;line-height:1.65;padding-bottom:78px;-webkit-text-size-adjust:100%}
+.wrap{width:100%;max-width:860px;margin:0 auto;padding-left:16px;padding-right:16px}
+.scrollx{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:11px 0}
+header{position:sticky;top:0;z-index:30;background:linear-gradient(135deg,#0f1b2e 0%,#173a5c 100%);color:#fff;padding:14px 16px 12px;box-shadow:0 2px 14px rgba(6,18,34,.25)}
+header .brand{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:800;letter-spacing:.5px}
+header .brand .dot{width:10px;height:10px;border-radius:50%;background:#ff7a1a;box-shadow:0 0 0 4px rgba(255,122,26,.28)}
+header .chips{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap}
+header .chips span{font-size:11px;color:#c2d5ea;background:rgba(255,255,255,.09);padding:3px 10px;border-radius:20px}
+header .chips b{color:#fff;font-weight:800}
+main{padding-top:18px;width:100%;max-width:100%;overflow-x:clip}
+section{display:none;max-width:100%;overflow-x:clip}
 section.on{display:block}
-/* plan */
-#plan h1{font-size:19px;color:#0d2b45;border-bottom:3px solid var(--acc);padding-bottom:5px;margin:26px 0 12px}
-#plan h2{font-size:16px;color:#124a7a;border-left:5px solid var(--acc);padding-left:9px;margin:22px 0 10px}
-#plan h3{font-size:14px;color:#1b5e20;margin:16px 0 6px}
-#plan p{margin:7px 0}
-#plan strong{color:#b3261e}
-#plan h1 strong,#plan h2 strong,#plan h3 strong{color:inherit}
-#plan ul,#plan ol{padding-left:20px;margin:7px 0}
-#plan li{margin:4px 0}
-#plan blockquote{background:#eef4fb;border-left:5px solid var(--acc);border-radius:6px;padding:8px 14px;margin:14px 0}
-#plan pre{background:#0d2b45;color:#d6e4f0;padding:10px 12px;border-radius:8px;overflow-x:auto;font-size:12px}
-#plan code{background:#f0f2f5;padding:1px 4px;border-radius:3px;font-size:12px}
-#plan pre code{background:none;color:inherit}
-#plan table{border-collapse:collapse;width:100%;font-size:12px;margin:10px 0;display:block;overflow-x:auto}
-#plan th,#plan td{border:1px solid #c4ccd6;padding:5px 7px;text-align:left;vertical-align:top;white-space:nowrap}
-#plan th{background:var(--acc);color:#fff}
-#plan hr{border:none;border-top:1px dashed #c4ccd6;margin:18px 0}
-/* dashboard */
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
+@media(min-width:560px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:#fff;border-radius:14px;padding:13px 15px;box-shadow:0 1px 3px rgba(16,30,54,.07)}
+.kpi .v{font-size:25px;font-weight:800;color:#0f1b2e;line-height:1;letter-spacing:-.5px}
+.kpi .v i{font-size:12px;font-weight:700;color:#94a3b8;font-style:normal;margin-left:2px}
+.kpi .l{font-size:11px;color:#64748b;margin-top:5px}
 .grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:680px){.grid{grid-template-columns:1fr 1fr}}
-.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card{background:#fff;border-radius:16px;padding:15px 16px;box-shadow:0 1px 3px rgba(16,30,54,.07);max-width:100%;overflow:hidden}
 .card.wide{grid-column:1/-1}
-.card h3{font-size:13px;color:#124a7a;margin:0 0 10px}
+.card h3{font-size:13px;font-weight:700;color:#0f1b2e;margin:0 0 11px}
 .chart{width:100%;height:auto}
-.tick{font-size:10px;fill:#8a97a8}.last{font-size:12px;font-weight:700;fill:#0d2b45}
-.target{font-size:10px;fill:#e0563f}.empty{color:#99a;padding:34px 0;text-align:center}
-table{width:100%;border-collapse:collapse;font-size:12px}
-.card th,.card td{border:1px solid #e6ebf1;padding:5px 8px;text-align:left;vertical-align:top}
-.card th{background:var(--acc);color:#fff}
-.card tr:nth-child(even) td{background:#f7f9fc}
-.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.fbtn{font-size:11px;padding:4px 10px;border:1px solid #d7dee8;border-radius:14px;background:#fff;color:#456}
-.fbtn.active{background:var(--acc);color:#fff;border-color:var(--acc)}
-.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10.5px;font-weight:700;white-space:nowrap}
-.tblwrap{overflow-x:auto}
-table.rec{white-space:nowrap}table.rec th{cursor:pointer}
-table.rec td.num{text-align:right}table.rec td.wrap{white-space:normal;min-width:140px;max-width:240px}
+.tick{font-size:10px;fill:#94a3b8}.last{font-size:12px;font-weight:800;fill:#0f1b2e}.target{font-size:10px;fill:#ff7a1a}
+.empty{color:#94a3b8;text-align:center;padding:32px 0;font-size:13px}
+.fchips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.fchip{font-size:12px;font-weight:700;padding:7px 14px;border:none;border-radius:20px;background:#fff;color:#475569;box-shadow:0 1px 2px rgba(16,30,54,.07)}
+.fchip.on{background:#0f1b2e;color:#fff}
+.rc-list{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:680px){.rc-list{grid-template-columns:1fr 1fr}}
+.rc{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,30,54,.07)}
+.rc-top{display:flex;align-items:center;gap:9px;margin-bottom:11px}
+.rc-date{font-size:12px;color:#64748b;font-weight:700}
+.rc-score{margin-left:auto;font-size:18px;font-weight:800;color:#0f1b2e}
+.rc-score i{font-size:11px;color:#94a3b8;font-style:normal;font-weight:700}
+.badge{display:inline-block;padding:3px 11px;border-radius:20px;font-size:11px;font-weight:800}
+.rc-mets{display:flex;flex-wrap:wrap;gap:18px}
+.rc-mets .met b{font-size:19px;font-weight:800;color:#0f1b2e;letter-spacing:-.3px}
+.rc-mets .met span{font-size:10px;color:#94a3b8;margin-left:3px;font-weight:600}
+.rc-det{font-size:11.5px;color:#64748b;margin-top:10px;line-height:1.55}
+.rc-fb{font-size:12px;color:#334155;margin-top:10px;padding:9px 11px;background:#f1f5f9;border-radius:11px;line-height:1.5}
+.rc-fb:before{content:"\1F4AC  "}
+.card table{width:100%;border-collapse:collapse;font-size:12px}
+.card th,.card td{border-bottom:1px solid #eef2f7;padding:6px 8px;text-align:left}
+.card th{color:#64748b;font-weight:700;font-size:11px}
+#plan{font-size:14px;overflow-wrap:anywhere;overflow-x:clip}
+#plan>*{max-width:100%;min-width:0}
+#plan h1{font-size:19px;font-weight:800;color:#0f1b2e;margin:22px 0 11px;padding-bottom:6px;border-bottom:3px solid #ff7a1a}
+#plan h2{font-size:16px;font-weight:800;color:#173a5c;margin:20px 0 9px;padding-left:10px;border-left:4px solid #ff7a1a}
+#plan h3{font-size:14px;font-weight:800;color:#15803d;margin:16px 0 6px}
+#plan p{margin:7px 0}
+#plan strong{color:#d64524;font-weight:800}
+#plan h1 strong,#plan h2 strong,#plan h3 strong{color:inherit}
+#plan ul,#plan ol{padding-left:20px;margin:7px 0}#plan li{margin:4px 0}
+#plan blockquote{background:#fff;border-left:4px solid #ff7a1a;border-radius:11px;padding:11px 15px;margin:14px 0;box-shadow:0 1px 3px rgba(16,30,54,.06)}
+#plan pre{background:#0f1b2e;color:#d6e4f0;padding:12px 14px;border-radius:11px;overflow-x:auto;font-size:12px}
+#plan code{background:#e8edf3;padding:1px 5px;border-radius:4px;font-size:12px;word-break:break-all;overflow-wrap:anywhere}#plan pre code{background:none;color:inherit;word-break:normal}
+#plan table{border-collapse:collapse;font-size:12px}
+#plan th,#plan td{border:1px solid #dbe3ec;padding:5px 8px;text-align:left;vertical-align:top;white-space:nowrap}
+#plan th{background:#173a5c;color:#fff}
+#plan hr{border:none;border-top:1px dashed #cbd5e1;margin:18px 0}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;background:rgba(15,27,46,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.08);padding-bottom:env(safe-area-inset-bottom)}
+.tabbar button{flex:1;background:none;border:none;color:#8ba3bf;font-size:11px;font-weight:700;padding:9px 0 8px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.tabbar button svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tabbar button.on{color:#ff7a1a}
 </style></head><body>
 <header>
-  <div class="t">🏃 サブエガ運用</div>
-  <div class="s">更新 2026-07-10 17:37 ／ 累計 12km ／ 記録 1本</div>
-  <nav>
-    <button data-t="dash" class="on" onclick="tab('dash')">グラフ</button>
-    <button data-t="log" onclick="tab('log')">記録</button>
-    <button data-t="plan" onclick="tab('plan')">計画</button>
-  </nav>
+  <div class="brand"><span class="dot"></span>マラソンログ</div>
+  <div class="chips"><span>累計 <b>12</b>km</span><span><b>1</b>本</span><span>目標 <b>サブエガ 2:50</b></span><span>更新 7/10 22:09</span></div>
 </header>
-<div class="wrap">
-  <section id="dash" class="on"><div class="grid"><div class="card"><h3>LT-long ペース推移（同一心拍での進歩＝第一計器）</h3><div class="empty">データがまだありません（「報告」で溜まります）</div></div><div class="card"><h3>LT-short ペース推移</h3><svg viewBox="0 0 660 260" class="chart"><line x1="56" y1="34.0" x2="642" y2="34.0" stroke="#e6ebf1"/><text x="48" y="38.0" text-anchor="end" class="tick">3:51</text><line x1="56" y1="79.0" x2="642" y2="79.0" stroke="#e6ebf1"/><text x="48" y="83.0" text-anchor="end" class="tick">3:51</text><line x1="56" y1="124.0" x2="642" y2="124.0" stroke="#e6ebf1"/><text x="48" y="128.0" text-anchor="end" class="tick">3:50</text><line x1="56" y1="169.0" x2="642" y2="169.0" stroke="#e6ebf1"/><text x="48" y="173.0" text-anchor="end" class="tick">3:49</text><line x1="56" y1="214.0" x2="642" y2="214.0" stroke="#e6ebf1"/><text x="48" y="218.0" text-anchor="end" class="tick">3:49</text><text x="349.0" y="236.0" text-anchor="middle" class="tick">07-09</text><polyline points="349.0,124.0" fill="none" stroke="#7048e8" stroke-width="2.5"/><circle cx="349.0" cy="124.0" r="3.5" fill="#7048e8"/><text x="349.0" y="114.0" text-anchor="end" class="last">3:50</text></svg></div><div class="card"><h3>ロング ドリフト率推移</h3><div class="empty">データがまだありません（「報告」で溜まります）</div></div><div class="card"><h3>週間走行距離</h3><svg viewBox="0 0 660 260" class="chart"><line x1="56" y1="34.0" x2="642" y2="34.0" stroke="#e6ebf1"/><text x="48" y="38.0" text-anchor="end" class="tick">101</text><line x1="56" y1="78.0" x2="642" y2="78.0" stroke="#e6ebf1"/><text x="48" y="82.0" text-anchor="end" class="tick">75</text><line x1="56" y1="122.0" x2="642" y2="122.0" stroke="#e6ebf1"/><text x="48" y="126.0" text-anchor="end" class="tick">50</text><line x1="56" y1="166.0" x2="642" y2="166.0" stroke="#e6ebf1"/><text x="48" y="170.0" text-anchor="end" class="tick">25</text><line x1="56" y1="210.0" x2="642" y2="210.0" stroke="#e6ebf1"/><text x="48" y="214.0" text-anchor="end" class="tick">0</text><text x="349.0" y="232.0" text-anchor="middle" class="tick">W28</text><line x1="56" y1="57.0" x2="642" y2="57.0" stroke="#e0563f" stroke-dasharray="5 4"/><text x="642" y="52.0" text-anchor="end" class="target">目安 88km</text><rect x="167.3" y="189.3" width="363.3" height="20.7" rx="3" fill="#1b9e77"/><text x="349.0" y="183.3" text-anchor="middle" class="last">12</text></svg></div><div class="card"><h3>コンディション（動きのスコア）</h3><svg viewBox="0 0 660 260" class="chart"><line x1="56" y1="34.0" x2="642" y2="34.0" stroke="#e6ebf1"/><text x="48" y="38.0" text-anchor="end" class="tick">8</text><line x1="56" y1="79.0" x2="642" y2="79.0" stroke="#e6ebf1"/><text x="48" y="83.0" text-anchor="end" class="tick">8</text><line x1="56" y1="124.0" x2="642" y2="124.0" stroke="#e6ebf1"/><text x="48" y="128.0" text-anchor="end" class="tick">7</text><line x1="56" y1="169.0" x2="642" y2="169.0" stroke="#e6ebf1"/><text x="48" y="173.0" text-anchor="end" class="tick">6</text><line x1="56" y1="214.0" x2="642" y2="214.0" stroke="#e6ebf1"/><text x="48" y="218.0" text-anchor="end" class="tick">6</text><text x="349.0" y="236.0" text-anchor="middle" class="tick">07-09</text><polyline points="349.0,124.0" fill="none" stroke="#f08c00" stroke-width="2.5"/><circle cx="349.0" cy="124.0" r="3.5" fill="#f08c00"/><text x="349.0" y="114.0" text-anchor="end" class="last">7</text></svg></div></div></section>
-  <section id="log"><div class="grid"><div class="card wide"><h3>練習記録（種別ボタンで絞り込み・見出しクリックで並べ替え）</h3><div class="filters"><button class="fbtn active" data-t="all">すべて</button><button class="fbtn" data-t="LT-short">LT-short</button></div><div class="tblwrap"><table class="rec"><thead><tr><th data-typ="s">日付 ↕</th><th data-typ="s">種別 ↕</th><th data-typ="s">R週 ↕</th><th data-typ="n">km ↕</th><th data-typ="n">分 ↕</th><th data-typ="p">ペース ↕</th><th data-typ="n">平均HR ↕</th><th data-typ="w">内容 ↕</th><th data-typ="n">ゾーン% ↕</th><th data-typ="n">プラトー ↕</th><th data-typ="n">ドリフト% ↕</th><th data-typ="n">スコア ↕</th><th data-typ="w">違和感 ↕</th><th data-typ="n">補給 ↕</th><th data-typ="n">気温 ↕</th><th data-typ="w">メモ ↕</th><th data-typ="w">フィードバック ↕</th></tr></thead><tbody><tr data-t="LT-short"><td>2026-07-09</td><td><span class="badge" style="background:#EEEDFE;color:#3C3489">LT-short</span></td><td>Week2</td><td class="num">11.84</td><td class="num">55</td><td class="num">3:50</td><td class="num">156</td><td class="wrap">3分×10 r60秒｜TM設定 ①-④3:50 ⑤⑥3:49 ⑦3:50 ⑧-⑩3:52</td><td class="num">38</td><td class="num">172</td><td class="num">—</td><td class="num">7</td><td class="wrap">—</td><td class="num">—</td><td class="num">—</td><td class="wrap">腕時計ペース4:38はTM乖離のためTM設定値を採用。本7プラトー178=キャップ接触</td><td class="wrap">プラトー163→176の右肩上がりで教科書通り。本7のみ突っ込み。10本30分完遂</td></tr></tbody></table></div><script>(function(){
-var card=document.currentScript.closest('.card');
-var trs=[].slice.call(card.querySelectorAll('tbody tr'));
-card.querySelectorAll('.fbtn').forEach(function(b){b.onclick=function(){
- card.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('active');});b.classList.add('active');
- var t=b.getAttribute('data-t');
- trs.forEach(function(tr){tr.style.display=(t==='all'||tr.getAttribute('data-t')===t)?'':'none';});};});
-function pc(s){var m=(s||'').split(':');return m.length===2?(+m[0]*60+ +m[1]):1e9;}
-var dir={};
-card.querySelectorAll('th').forEach(function(th,k){th.onclick=function(){
- var typ=th.getAttribute('data-typ'),tb=card.querySelector('tbody');
- var rows=[].slice.call(tb.querySelectorAll('tr'));dir[k]=!dir[k];
- rows.sort(function(a,b){
-  var x=a.children[k].textContent.trim(),y=b.children[k].textContent.trim();
-  if(typ==='n'){x=parseFloat(x);y=parseFloat(y);x=isNaN(x)?-1e9:x;y=isNaN(y)?-1e9:y;return dir[k]?x-y:y-x;}
-  if(typ==='p'){x=pc(x);y=pc(y);return dir[k]?x-y:y-x;}
-  return dir[k]?x.localeCompare(y,'ja'):y.localeCompare(x,'ja');});
- rows.forEach(function(r){tb.appendChild(r);});};});
-})();</script></div><div class="card wide"><h3>週次サマリー</h3><table><tr><th>週</th><th>距離km</th><th>本数</th><th>平均スコア</th></tr><tr><td>2026-W28</td><td>11.8</td><td>1</td><td>7.0</td></tr></table></div></div></section>
+<main class="wrap">
+  <section id="dash" class="on">
+    <div class="kpis"><div class="kpi"><div class="v">12<i>km</i></div><div class="l">累計距離</div></div><div class="kpi"><div class="v">1<i>本</i></div><div class="l">練習</div></div><div class="kpi"><div class="v">7<i>/10</i></div><div class="l">直近スコア</div></div><div class="kpi"><div class="v">4:01<i>/km</i></div><div class="l">サブエガ目標</div></div></div>
+    <div class="grid"><div class="card"><h3>LT-long ペース推移（同一心拍での進歩）</h3><div class="empty">データがまだありません（「報告」で溜まります）</div></div><div class="card"><h3>LT-short ペース推移</h3><svg viewBox="0 0 660 260" class="chart"><line x1="56" y1="34.0" x2="642" y2="34.0" stroke="#e6ebf1"/><text x="48" y="38.0" text-anchor="end" class="tick">3:51</text><line x1="56" y1="79.0" x2="642" y2="79.0" stroke="#e6ebf1"/><text x="48" y="83.0" text-anchor="end" class="tick">3:51</text><line x1="56" y1="124.0" x2="642" y2="124.0" stroke="#e6ebf1"/><text x="48" y="128.0" text-anchor="end" class="tick">3:50</text><line x1="56" y1="169.0" x2="642" y2="169.0" stroke="#e6ebf1"/><text x="48" y="173.0" text-anchor="end" class="tick">3:49</text><line x1="56" y1="214.0" x2="642" y2="214.0" stroke="#e6ebf1"/><text x="48" y="218.0" text-anchor="end" class="tick">3:49</text><text x="349.0" y="236.0" text-anchor="middle" class="tick">07-09</text><polyline points="349.0,124.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/><circle cx="349.0" cy="124.0" r="3.5" fill="#7c3aed"/><text x="349.0" y="114.0" text-anchor="end" class="last">3:50</text></svg></div><div class="card"><h3>ロング ドリフト率推移</h3><div class="empty">データがまだありません（「報告」で溜まります）</div></div><div class="card"><h3>週間走行距離</h3><svg viewBox="0 0 660 260" class="chart"><line x1="56" y1="34.0" x2="642" y2="34.0" stroke="#e6ebf1"/><text x="48" y="38.0" text-anchor="end" class="tick">101</text><line x1="56" y1="78.0" x2="642" y2="78.0" stroke="#e6ebf1"/><text x="48" y="82.0" text-anchor="end" class="tick">75</text><line x1="56" y1="122.0" x2="642" y2="122.0" stroke="#e6ebf1"/><text x="48" y="126.0" text-anchor="end" class="tick">50</text><line x1="56" y1="166.0" x2="642" y2="166.0" stroke="#e6ebf1"/><text x="48" y="170.0" text-anchor="end" class="tick">25</text><line x1="56" y1="210.0" x2="642" y2="210.0" stroke="#e6ebf1"/><text x="48" y="214.0" text-anchor="end" class="tick">0</text><text x="349.0" y="232.0" text-anchor="middle" class="tick">W28</text><line x1="56" y1="57.0" x2="642" y2="57.0" stroke="#e0563f" stroke-dasharray="5 4"/><text x="642" y="52.0" text-anchor="end" class="target">目安 88km</text><rect x="167.3" y="189.3" width="363.3" height="20.7" rx="3" fill="#16a34a"/><text x="349.0" y="183.3" text-anchor="middle" class="last">12</text></svg></div><div class="card"><h3>コンディション（動きのスコア）</h3><svg viewBox="0 0 660 260" class="chart"><line x1="56" y1="34.0" x2="642" y2="34.0" stroke="#e6ebf1"/><text x="48" y="38.0" text-anchor="end" class="tick">8</text><line x1="56" y1="79.0" x2="642" y2="79.0" stroke="#e6ebf1"/><text x="48" y="83.0" text-anchor="end" class="tick">8</text><line x1="56" y1="124.0" x2="642" y2="124.0" stroke="#e6ebf1"/><text x="48" y="128.0" text-anchor="end" class="tick">7</text><line x1="56" y1="169.0" x2="642" y2="169.0" stroke="#e6ebf1"/><text x="48" y="173.0" text-anchor="end" class="tick">6</text><line x1="56" y1="214.0" x2="642" y2="214.0" stroke="#e6ebf1"/><text x="48" y="218.0" text-anchor="end" class="tick">6</text><text x="349.0" y="236.0" text-anchor="middle" class="tick">07-09</text><polyline points="349.0,124.0" fill="none" stroke="#ff7a1a" stroke-width="2.5"/><circle cx="349.0" cy="124.0" r="3.5" fill="#ff7a1a"/><text x="349.0" y="114.0" text-anchor="end" class="last">7</text></svg></div></div>
+  </section>
+  <section id="log">
+    <div class="fchips"><button class="fchip on" data-t="all">すべて</button><button class="fchip" data-t="LT-short">LT-short</button></div><div class="rc-list"><div class="rc" data-t="LT-short"><div class="rc-top"><span class="badge" style="background:#EEEDFE;color:#3C3489">LT-short</span><span class="rc-date">07-09 · Week2</span><span class="rc-score">7<i>/10</i></span></div><div class="rc-mets"><div class="met"><b>11.84</b><span>km</span></div><div class="met"><b>3:50</b><span>ペース</span></div><div class="met"><b>156</b><span>平均HR</span></div><div class="met"><b>172</b><span>プラトー</span></div></div><div class="rc-det">3分×10 r60秒｜TM設定 ①-④3:50 ⑤⑥3:49 ⑦3:50 ⑧-⑩3:52 ・ ゾーン滞在 38%</div><div class="rc-fb">プラトー163→176の右肩上がりで教科書通り。本7のみ突っ込み。10本30分完遂</div></div></div><script>(function(){var w=document.getElementById('log');w.querySelectorAll('.fchip').forEach(function(b){b.onclick=function(){w.querySelectorAll('.fchip').forEach(function(x){x.classList.remove('on');});b.classList.add('on');var t=b.dataset.t;w.querySelectorAll('.rc').forEach(function(c){c.style.display=(t==='all'||c.dataset.t===t)?'':'none';});};});})();</script>
+    <div style="margin-top:16px"><div class="card wide"><h3>週次サマリー</h3><table><tr><th>週</th><th>距離km</th><th>本数</th><th>平均スコア</th></tr><tr><td>2026-W28</td><td>11.8</td><td>1</td><td>7.0</td></tr></table></div></div>
+  </section>
   <section id="plan"><h1>サブエガ・ロードマップ</h1>
 <p><strong>目標:</strong> 2027年サブエガ（フルマラソン 2:50切り＝4:01/km・想定走行時間 約2時間49分）。本命①=西尾マラソン 1/17、本命②=2月下旬フル
 <strong>対象:</strong> ランナー ／ <strong>心拍基準:</strong> %HRR主体（HRmax 200 / 安静時 50 / HRR 150）。bpm換算 = 50 + 1.5 × %HRR
@@ -128,7 +130,7 @@ card.querySelectorAll('th').forEach(function(th,k){th.onclick=function(){
 <h1>Ⅲ. 期分け — いつ何をやるか（背骨）</h1>
 <p><strong>作る → 変える → 持たせる → 仕上げる → 立て直す。</strong> この動詞の連なりが計画の背骨。名前を見れば「今の自分が何をやるか」が一言で分かる。西尾（1/17）＝R-0を起点にカウントダウンする。</p>
 <h2>レースカレンダー</h2>
-<table>
+<div class="scrollx"><table>
 <thead>
 <tr>
 <th>日付</th>
@@ -163,9 +165,9 @@ card.querySelectorAll('th').forEach(function(th,k){th.onclick=function(){
 <td>—</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2>5フェーズ</h2>
-<table>
+<div class="scrollx"><table>
 <thead>
 <tr>
 <th style="text-align: center;">Phase</th>
@@ -224,13 +226,13 @@ card.querySelectorAll('th').forEach(function(th,k){th.onclick=function(){
 <td>フル 2下旬</td>
 </tr>
 </tbody>
-</table>
-<pre><code>Phase1  LT ██████████  →  MP ▁          「作る」
+</table></div>
+<div class="scrollx"><pre><code>Phase1  LT ██████████  →  MP ▁          「作る」
 Phase2  LT ██████      →  MP ██████      「変える」
 Phase3  LT ██          →  MP ██████████  「持たせる」
 Phase4        研いで抜く（鮮度化）        「仕上げる」
 Phase5        立て直して2本目へ           「立て直す」
-</code></pre>
+</code></pre></div>
 <h2>各フェーズの狙い（補足）</h2>
 <ul>
 <li><strong>Phase 1「LTを作る」</strong>：再構築期の本人にとって、これは"維持"でなく本当に作る作業。ただし目標は「3:50をより速く」ではなく「<strong>同じ3:50をより低い心拍で・ドリフトさせずに</strong>」（＝天井を戻すが速さは追いかけない）。土台期ゴール＝Ⅴ-3のマイルストーン参照</li>
@@ -260,7 +262,7 @@ Phase5        立て直して2本目へ           「立て直す」
 <li>MLSS（≒4mmol）≈ <strong>179bpm（86%HRR）</strong> ← ハーフ序盤8-20分の安定心拍</li>
 <li>マラソン強度（≒2〜2.5mmol、LT1のすぐ上）≈ <strong>163bpm（75%HRR）</strong> ← フル序盤10kmの巡航心拍</li>
 </ul>
-<table>
+<div class="scrollx"><table>
 <thead>
 <tr>
 <th>用途</th>
@@ -325,7 +327,7 @@ Phase5        立て直して2本目へ           「立て直す」
 <td>短レップは心拍が遅れるためRPE管理</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>設定＝狙う帯／キャップ＝超え続けたら速度を1段落とす天井。</strong> 守るのは「<strong>イージーは徹底的に楽</strong>」「<strong>質は2つともMLSS（179）を超えない</strong>」の2点だけ。</p>
 <h2>Ⅳ-2. 各メニューの目的と実行仕様</h2>
 <h3>1. LT（火・木の実験室：LT-long／LT-short／ペーサー）</h3>
@@ -374,7 +376,7 @@ Phase5        立て直して2本目へ           「立て直す」
 </ul>
 <h2>Ⅳ-3. フェーズ別の実行（週間構造と進行）</h2>
 <p>週の骨格（曜日の役割）は全期ほぼ共通。<strong>ロング・坂道・MPの"中身と頻度"がフェーズで変わる</strong>（フェーズ別は下記）。</p>
-<table>
+<div class="scrollx"><table>
 <thead>
 <tr>
 <th>曜日</th>
@@ -411,7 +413,7 @@ Phase5        立て直して2本目へ           「立て直す」
 <td>ロング（フェーズ別に内容が変わる。Phase 2-3は M週=MPトレーニング／E週=Easyロング）</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li>火曜の夜が79%（168bpm）を超える見込みの日は朝を12分×2に減らす</li>
 <li>練習会に出た週は、内容にかかわらずその週の LT-short 枠を消化したものとみなす。追加の LT-short で取り返さない</li>
@@ -449,7 +451,7 @@ Phase5        立て直して2本目へ           「立て直す」
 <p>週末ロングは「8月プログレッシブ → 9月M感覚 → 変化走 → 連続MP（リハーサル）→ 判定ハーフ → 総仕上げ」で一本の連続した流れ。「2:05の壁」を42kmの外へ押し出す心臓部。<strong>M区間を終盤に置く理由</strong>：糖が減り脚が疲れた状態でMPを出すことが壁を後退させる最も特異的な刺激であり、序盤M型では買えない。数字はすべて目安（フェーズの進捗・当日の状態で柔軟に）。</p>
 <h3>週末カレンダー（8月〜本番）</h3>
 <p><strong>Phase 1（土台・8月〜9/20）— プログレッシブ／Easyロングを隔週交互＋回復週</strong></p>
-<table>
+<div class="scrollx"><table>
 <thead>
 <tr>
 <th>週</th>
@@ -490,9 +492,9 @@ Phase5        立て直して2本目へ           「立て直す」
 <td>Easyロング（回復）← <strong>Phase 1締め</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>Phase 2-3（9/27〜）— 変化走→連続、M週/E週を隔週交互、金沢・ハーフを内包</strong></p>
-<table>
+<div class="scrollx"><table>
 <thead>
 <tr>
 <th>週</th>
@@ -569,7 +571,7 @@ Phase5        立て直して2本目へ           「立て直す」
 <td><strong>西尾フル（本番）</strong></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3>MPの走り方（設定）</h3>
 <p><em>float（フロート）＝変化走のつなぎ区間を、止まらず・歩かず「軽く流して走り続ける」こと。完全回復させず、MPより少し遅いだけで転がす（Canovaの"走る回復"）。</em></p>
 <p><strong>MP変化走（10月・暑い）＝心拍基準</strong></p>
@@ -608,7 +610,7 @@ Phase5        立て直して2本目へ           「立て直す」
 <h3>レース本番プラン</h3>
 <p><strong>前日〜スタート前:</strong> 前日カーボローディング 8〜10g/kg（体重60kgなら480〜600g）。当日はスタート3時間前に炭水化物約100gの朝食（消化に慣れたもの）。スタート直前の新しい試みは一切しない。</p>
 <p><strong>レース中（ジェル5本+条件付き6本目）:</strong></p>
-<table>
+<div class="scrollx"><table>
 <thead>
 <tr>
 <th>経過時間</th>
@@ -661,7 +663,7 @@ Phase5        立て直して2本目へ           「立て直す」
 <td>従来通り毎回。約10g/hの上乗せ</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>合計: 125g（⑥摂取時150g）+ドリンク = 実効約55g/h。携行は前半用3本と後半用（モルテン）を分けて収納し取り違えを防ぐ。</p>
 <h3>腸トレーニング計画（2026年10月〜12月）</h3>
 <p>腸の吸収能力は訓練で向上する。10月以降のMペースロングはすべて補給リハーサルを兼ねる。</p>
@@ -703,7 +705,7 @@ Phase5        立て直して2本目へ           「立て直す」
 <li>木曜・LT-short: 3:45〜3:50/km（15.5〜16.0km/h）を設定帯（79-83%/168-175）で、キャップ178を超えず3分×8本、速い動きを保って完遂</li>
 <li>ロング: Pa:HRドリフト率5%以内（11月末まで・25km以上・給水あり）</li>
 </ul>
-<table>
+<div class="scrollx"><table>
 <thead>
 <tr>
 <th>時期</th>
@@ -743,7 +745,7 @@ Phase5        立て直して2本目へ           「立て直す」
 <td>25km M @4:00-4:03、ドリフト5%以内、55g/h完遂</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3>最終判定（12月中旬のハーフ結果で確定）</h3>
 <ul>
 <li>1:19:30以内 → サブエガプランをそのまま実行（4:01-4:03イーブン）</li>
@@ -758,10 +760,11 @@ Phase5        立て直して2本目へ           「立て直す」
 <li>回復週は省略しない。予定通り抜く</li>
 <li>飛んだ練習は追いかけない。計画は前にしか進まない</li>
 </ol></section>
-</div>
-<script>
-function tab(id){for(const s of document.querySelectorAll('section'))s.classList.toggle('on',s.id===id);
-for(const b of document.querySelectorAll('nav button'))b.classList.toggle('on',b.dataset.t===id);
-window.scrollTo(0,0);}
-</script>
+</main>
+<nav class="tabbar">
+  <button data-t="dash" class="on" onclick="tab('dash')"><svg viewBox="0 0 24 24"><path d="M4 20V11M10 20V4M16 20v-6M22 20H2"/></svg><span>グラフ</span></button>
+  <button data-t="log" onclick="tab('log')"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg><span>記録</span></button>
+  <button data-t="plan" onclick="tab('plan')"><svg viewBox="0 0 24 24"><path d="M5 21V4l7 2 7-2v13l-7 2-7-2z"/></svg><span>計画</span></button>
+</nav>
+<script>function tab(id){document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===id);});document.querySelectorAll('.tabbar button').forEach(function(b){b.classList.toggle('on',b.dataset.t===id);});window.scrollTo(0,0);}window.addEventListener('load',function(){var h=location.hash.slice(1);if(h&&document.getElementById(h))tab(h);});</script>
 </body></html>

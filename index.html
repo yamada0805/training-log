@@ -7,11 +7,11 @@
 <meta name="theme-color" content="#0f1b2e">
 <title>マラソンログ</title><style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;max-width:100%;overflow-x:hidden}
-body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#1a2230;background:#eef2f7;overflow-x:hidden;line-height:1.65;padding-bottom:78px;-webkit-text-size-adjust:100%}
+html,body{margin:0;max-width:100%;overflow-x:clip}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#1a2230;background:#eef2f7;line-height:1.65;padding-bottom:78px;-webkit-text-size-adjust:100%}
 .wrap{width:100%;max-width:860px;margin:0 auto;padding-left:16px;padding-right:16px}
 .scrollx{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:11px 0}
-header{position:sticky;top:0;z-index:30;background:linear-gradient(135deg,#0f1b2e 0%,#173a5c 100%);color:#fff;padding:14px 16px 12px;box-shadow:0 2px 14px rgba(6,18,34,.25)}
+header{position:relative;z-index:10;background:linear-gradient(135deg,#0f1b2e 0%,#173a5c 100%);color:#fff;padding:14px 16px 12px;box-shadow:0 2px 14px rgba(6,18,34,.25)}
 header .brand{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:800;letter-spacing:.5px}
 header .brand .dot{width:10px;height:10px;border-radius:50%;background:#ff7a1a;box-shadow:0 0 0 4px rgba(255,122,26,.28)}
 header .chips{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap}
@@ -133,6 +133,22 @@ table.laps td.plat.hot{color:#d64524;font-weight:800}
 #plan th,#plan td{border:1px solid #dbe3ec;padding:5px 8px;text-align:left;vertical-align:top;white-space:nowrap}
 #plan th{background:#173a5c;color:#fff}
 #plan hr{border:none;border-top:1px dashed #cbd5e1;margin:18px 0}
+#plan{line-height:1.8;padding-top:14px}
+.chnav{position:sticky;top:0;z-index:30;display:none;gap:6px;overflow-x:auto;padding:10px 16px 11px;background:rgba(238,242,247,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);scrollbar-width:none;border-bottom:1px solid rgba(15,27,46,.07)}
+.chnav.on{display:flex}
+.chnav::-webkit-scrollbar{display:none}
+.chnav button{flex:0 0 auto;border:none;background:#fff;color:#173a5c;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:999px;box-shadow:0 1px 2px rgba(16,30,54,.08);white-space:nowrap}
+.chnav button:active{background:#ff7a1a;color:#fff}
+.chnav button.allbtn{background:#173a5c;color:#fff}
+details.ch{background:#fff;border-radius:14px;margin:0 0 10px;box-shadow:0 1px 3px rgba(16,30,54,.07);overflow:hidden;scroll-margin-top:56px}
+details.ch>summary{list-style:none;cursor:pointer;font-size:16px;font-weight:800;color:#0f1b2e;padding:14px 16px;display:flex;align-items:center;gap:10px}
+details.ch>summary::-webkit-details-marker{display:none}
+details.ch>summary::before{content:"▸";color:#ff7a1a;font-size:14px;flex:0 0 auto;transition:transform .16s}
+details.ch[open]>summary::before{transform:rotate(90deg)}
+details.ch[open]>summary{border-bottom:2px solid #ff7a1a}
+.chbody{padding:4px 16px 16px}
+.chbody>h2:first-child,.chbody>p:first-child,.chbody>div:first-child{margin-top:12px}
+.chbody h2{margin-top:24px}
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;background:rgba(15,27,46,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.08);padding-bottom:env(safe-area-inset-bottom)}
 .tabbar button{flex:1;background:none;border:none;color:#8ba3bf;font-size:11px;font-weight:700;padding:9px 0 8px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
 .tabbar button svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -140,8 +156,9 @@ table.laps td.plat.hot{color:#d64524;font-weight:800}
 </style></head><body>
 <header>
   <div class="brand"><span class="dot"></span>マラソンログ</div>
-  <div class="chips"><span>累計 <b>547</b>km</span><span><b>63</b>本</span><span>目標 <b>サブエガ 2:50</b></span><span>更新 9/27 11:53</span></div>
+  <div class="chips"><span>累計 <b>547</b>km</span><span><b>63</b>本</span><span>目標 <b>サブエガ 2:50</b></span><span>更新 9/27 12:06</span></div>
 </header>
+<div class="chnav" id="chnav"><button type="button" data-ch="ch1">Ⅰ. 課題</button><button type="button" data-ch="ch2">Ⅱ. 原則</button><button type="button" data-ch="ch3">Ⅲ. 土台</button><button type="button" data-ch="ch4">Ⅳ. 15週ブロック</button><button type="button" data-ch="ch5">Ⅴ. 本番と管理</button><button type="button" data-ch="ch6">Ⅵ. 何を見て判断するか</button><button type="button" class="allbtn" data-all="1">全部開く</button></div>
 <main class="wrap">
   <section id="dash" class="on">
     <div class="kpis"><div class="kpi"><div class="v">547<i>km</i></div><div class="l">累計距離</div></div><div class="kpi"><div class="v">63<i>本</i></div><div class="l">練習</div></div><div class="kpi"><div class="v">5<i>/10</i></div><div class="l">直近スコア</div></div><div class="kpi"><div class="v">4:01<i>/km</i></div><div class="l">サブエガ目標</div></div></div>
@@ -172,7 +189,7 @@ if(p)p.onclick=function(){sh(cur-1);};if(n)n.onclick=function(){sh(cur+1);};
 <strong>LT → MP → 42km。</strong> この一本の矢印に、週3回のポイント練習も、終盤のMP練習も、補給も、すべてが紐づく。</p>
 </blockquote>
 <hr />
-<h1>Ⅰ. 課題</h1>
+<details class="ch" id="ch1"><summary>Ⅰ. 課題</summary><div class="chbody">
 <p>5年分の練習ログと4レースのラップ分析から確定した事実。<strong>ここが「なぜこの練習なのか」の出発点。</strong></p>
 <p><strong>1. 壁は距離ではなく時間（約2:05）に固定されている。</strong>
 過去3レース（2:57:08 / 2:59:00 / 2:53:20）とも、フィットネスに関係なく経過2時間5分前後で崩壊が始まった。崩壊中も心拍は頭打ちで心肺に余裕があり、ピッチは保たれたまま<strong>歩幅だけ最大24%低下</strong>する。グリコーゲン枯渇と終盤の筋持久力低下。
@@ -191,7 +208,7 @@ if(p)p.onclick=function(){sh(cur-1);};if(n)n.onclick=function(){sh(cur+1);};
 <p><strong>6. 現在地。</strong>
 2026年9月の10km実測 41:00（体調不良明け）。ロングのドリフト約15%（6月・無補給）。<strong>ドリフト5%以内が壁消滅のシグナル。</strong></p>
 <hr />
-<h1>Ⅱ. 原則</h1>
+</div></details><details class="ch" id="ch2"><summary>Ⅱ. 原則</summary><div class="chbody">
 <h2>1. 骨格に合わせたランニングエコノミー</h2>
 <p>疲労で動作パターンが崩れ代償動作が出ると、パフォーマンス低下と故障に直結する。理学療法士の強みを活かし、自分の骨格特性に合ったフォームを感知・修正し、微細な炎症を管理しながら負荷を積む。</p>
 <p><strong>これは強度ルールとして実装されている。「もう少しできる」状態で終えれば、フォームが崩れる領域に入らない。</strong> 追い込まないことは根性の問題ではなく、動作の質を守るための設計だ。</p>
@@ -258,7 +275,7 @@ if(p)p.onclick=function(){sh(cur-1);};if(n)n.onclick=function(){sh(cur+1);};
 <p>目標タイムから逆算したペースで練習しても、身体はそこにいない。<strong>ブロックの途中でレースを走り、そのタイムで設定を引き直す。</strong></p>
 <p>同時に、レースそのものが最大の特異刺激になる。<strong>3週間前の30kmペース走の枠は、3週間前のハーフで埋める。</strong> 同じ枠を「長くゆっくり」ではなく「短く速く」で。</p>
 <hr />
-<h1>Ⅲ. 土台 — 一年中回す週サイクル</h1>
+</div></details><details class="ch" id="ch3"><summary>Ⅲ. 土台 — 一年中回す週サイクル</summary><div class="chbody">
 <p><strong>ブロックの中だけのものではない。年間を通してこの形を回す。</strong></p>
 <div class="scrollx"><table>
 <thead>
@@ -421,7 +438,7 @@ if(p)p.onclick=function(){sh(cur-1);};if(n)n.onclick=function(){sh(cur+1);};
 <p>つなぎとレストは<strong>146〜160に戻す</strong>。狙いは「乳酸を掃くが、冷やさない」。
 <strong>168に張り付いて戻らないのは攻めすぎのサイン。</strong></p>
 <hr />
-<h1>Ⅳ. 15週ブロック — にしおまでの地図</h1>
+</div></details><details class="ch" id="ch4"><summary>Ⅳ. 15週ブロック — にしおまでの地図</summary><div class="chbody">
 <p><strong>第1週＝2026/10/5（月）／第15週＝2027/1/11〜1/17</strong></p>
 <div class="scrollx"><pre><code>2026/10/25  金沢マラソン（フル）        第3週   3:15切り。練習の一環
 2026/11/8   大府シティ（クオーター）    第5週   MPの設定
@@ -877,7 +894,7 @@ if(p)p.onclick=function(){sh(cur-1);};if(n)n.onclick=function(){sh(cur+1);};
 </code></pre></div>
 <p><strong>同じMPを、フレッシュ（12/27）→ 疲労下（1/3）の順で踏む。質 → 耐久。</strong></p>
 <hr />
-<h1>Ⅴ. 本番と管理</h1>
+</div></details><details class="ch" id="ch5"><summary>Ⅴ. 本番と管理</summary><div class="chbody">
 <h2>Ⅴ-1. 補給戦略</h2>
 <h3>なぜ補給が最優先課題なのか</h3>
 <p>過去3レースの失速の開始点は、距離ではなく<strong>経過時間およそ2時間5分に固定</strong>されている。フィットネスが向上してもこの時刻は動かない。</p>
@@ -1036,7 +1053,7 @@ if(p)p.onclick=function(){sh(cur-1);};if(n)n.onclick=function(){sh(cur+1);};
 <li><strong>飛んだ練習は追いかけない。</strong> 計画は前にしか進まない</li>
 </ol>
 <hr />
-<h1>Ⅵ. 何を見て判断するか</h1>
+</div></details><details class="ch" id="ch6"><summary>Ⅵ. 何を見て判断するか</summary><div class="chbody">
 <h2>毎週見る数字は3つだけ</h2>
 <ol>
 <li><strong>同じ心拍でのペース</strong>（LTインターバルで自動取得）── 速くなり続けていれば前進している</li>
@@ -1136,12 +1153,12 @@ if(p)p.onclick=function(){sh(cur-1);};if(n)n.onclick=function(){sh(cur+1);};
 <li>同じ心拍でのペースが横ばい以上、ドリフトが改善傾向</li>
 </ol>
 <hr />
-<p><strong>迷ったらⅠに戻る。壁は時間であり、主戦場は「落ちなくなる練習」と「補給」だ。</strong></p></section>
+<p><strong>迷ったらⅠに戻る。壁は時間であり、主戦場は「落ちなくなる練習」と「補給」だ。</strong></p></div></details></section>
 </main>
 <nav class="tabbar">
   <button data-t="dash" class="on" onclick="tab('dash')"><svg viewBox="0 0 24 24"><path d="M4 20V11M10 20V4M16 20v-6M22 20H2"/></svg><span>グラフ</span></button>
   <button data-t="log" onclick="tab('log')"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg><span>記録</span></button>
   <button data-t="plan" onclick="tab('plan')"><svg viewBox="0 0 24 24"><path d="M5 21V4l7 2 7-2v13l-7 2-7-2z"/></svg><span>計画</span></button>
 </nav>
-<script>function tab(id){document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===id);});document.querySelectorAll('.tabbar button').forEach(function(b){b.classList.toggle('on',b.dataset.t===id);});window.scrollTo(0,0);}window.addEventListener('load',function(){var h=location.hash.slice(1);if(h&&document.getElementById(h))tab(h);});</script>
+<script>function tab(id){document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===id);});document.querySelectorAll('.tabbar button').forEach(function(b){b.classList.toggle('on',b.dataset.t===id);});var n=document.getElementById('chnav');if(n)n.classList.toggle('on',id==='plan');window.scrollTo(0,0);}window.addEventListener('load',function(){var h=location.hash.slice(1);if(h&&document.getElementById(h))tab(h);});document.addEventListener('click',function(e){var b=e.target.closest?e.target.closest('.chnav button'):null;if(!b)return;var p=document.getElementById('plan');if(b.dataset.all){var op=b.textContent==='全部開く';p.querySelectorAll('details.ch').forEach(function(d){d.open=op;});b.textContent=op?'全部閉じる':'全部開く';return;}var d=document.getElementById(b.dataset.ch);if(!d)return;d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'});});</script>
 </body></html>

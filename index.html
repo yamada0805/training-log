@@ -4,7 +4,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="マラソンログ">
-<meta name="theme-color" content="#080B12">
+<meta name="theme-color" content="#000000">
 <title>マラソンログ</title><style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;max-width:100%;overflow-x:clip}
@@ -155,10 +155,11 @@ details.ch[open]>summary{border-bottom:2px solid #ff7a1a}
 .tabbar button.on{color:#ff7a1a}
 
 /* ========== ダーク + 「今日」タブ ========== */
-/* 小さい文字ほど明るさが要る。--fg3 は本文には使わず、補助だけに使う */
-:root{--bg:#0A0D14;--surface:#141A27;--surface2:#1E2534;--line:rgba(255,255,255,.08);
- --fg:#F2F5FA;--fg2:#AEBACD;--fg3:#7D8AA0;--accent:#FF8A2B;--accent-dim:#5A4430;
- --good:#4ADE80;--warn:#FBBF24;--bad:#FB7185;--info:#60A5FA}
+/* 背景も灰色もニュートラルにする。青みを入れると文字との分離が悪くなり、
+   屋外で読めなくなる。Strava・NRC・COROS はどれも「ほぼ黒＋ほぼ白」。 */
+:root{--bg:#000000;--surface:#161618;--surface2:#242427;--line:rgba(255,255,255,.11);
+ --fg:#FFFFFF;--fg2:#B8B8BD;--fg3:#8E8E93;--accent:#FF6B00;
+ --good:#32D74B;--warn:#FFD60A;--bad:#FF453A;--info:#0A84FF}
 body{background:var(--bg);color:var(--fg);font-feature-settings:"tnum" 1}
 /* 上のバーは最小限。「今日」ではカウントダウンが見出しになるのでチップは出さない */
 header{background:var(--bg);box-shadow:none;padding:14px 16px 6px}
@@ -169,7 +170,7 @@ header .chips span{background:var(--surface2);color:var(--fg2);font-size:11px}
 body:has(#today.on) header .chips{display:none}
 main{padding-top:10px}
 .card,.kpi,.rc,details.ch{background:var(--surface);box-shadow:none}
-.card h3{font-size:11px;letter-spacing:.13em;color:var(--fg3);font-weight:700;text-transform:uppercase;margin-bottom:12px}
+.card h3{font-size:12px;letter-spacing:.09em;color:var(--fg3);font-weight:700;margin-bottom:13px}
 .kpi .v,.rc-score,.rc-mets .met b,details.ch>summary{color:var(--fg)}
 .kpi .l,.rc-date,.rc-det{color:var(--fg2)}
 .kpi .v i,.rc-score i,.rc-mets .met span{color:var(--fg3)}
@@ -182,15 +183,14 @@ table.laps td{border-top:1px solid var(--line);border-bottom:none;color:var(--fg
 .tick{fill:var(--fg3)}.last{fill:var(--fg)}
 .empty{color:var(--fg3)}
 details.ch[open]>summary{border-bottom-color:var(--accent)}
-.tabbar{background:rgba(8,11,18,.88);border-top:1px solid var(--line)}
+.tabbar{background:rgba(0,0,0,.9);border-top:1px solid var(--line)}
 .tabbar button{color:var(--fg3)}
 
-#today>.card:first-child{background:linear-gradient(180deg,#19202F 0%,var(--surface) 70%);
- box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+#today>.card:first-child{background:#1C1C1F;box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
 #today>.card:first-child h3{color:var(--fg2)}
 
 /* 計画 */
-.chnav{background:rgba(8,11,18,.92)!important;border-bottom:1px solid var(--line)}
+.chnav{background:rgba(0,0,0,.94)!important;border-bottom:1px solid var(--line)}
 .chnav button{background:var(--surface2)!important;color:var(--fg2)!important;box-shadow:none}
 .chnav button.allbtn{background:var(--accent)!important;color:#0B0F18!important}
 #plan blockquote{background:var(--surface2)!important;box-shadow:none;color:var(--fg2)}
@@ -214,11 +214,12 @@ details.ch[open]>summary{border-bottom-color:var(--accent)}
 .cal-c{color:var(--fg2)}
 .cal-c.has{background:var(--surface2)!important;color:var(--fg)}
 .cal-c.sel,.cal-c.today{background:var(--accent)!important;color:#0B0F18!important}
+.cal-n{color:var(--fg3)}
 .cal-c.has .cal-n{color:var(--fg)}
 .cal-c.sel .cal-n,.cal-c.today .cal-n{color:#0B0F18}
 .sc-env span{background:var(--surface2)!important;color:var(--fg2)!important}
 .sc-env em{color:var(--fg3)!important}
-.cal-h,.cal-w,.cal-head{color:var(--fg3)!important}
+.cal-h,.cal-w,.cal-head{color:var(--fg2)!important}
 .dd-date{color:var(--fg2)}
 .sc-head,.sc-time,.sc-score{color:var(--fg)}
 .sc-det,.sc-env,.sc-zt,.sc-note,.sub{color:var(--fg3)}
@@ -232,13 +233,13 @@ button:not(.tabbar button):not(.fchip){color:var(--fg2)}
 
 /* 今日 */
 #today .hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-#today .hd .d{font-size:11px;letter-spacing:.14em;color:var(--fg3)}
-#today .hd .n{font-size:12.5px;color:var(--fg2);font-weight:600}
+#today .hd .d{font-size:12px;letter-spacing:.08em;color:var(--fg3)}
+#today .hd .n{font-size:13px;color:var(--fg2);font-weight:600}
 #today .count{display:flex;align-items:baseline;gap:7px;margin-top:3px}
-#today .count b{font-size:38px;font-weight:700;letter-spacing:-.02em;line-height:1;color:var(--fg)}
+#today .count b{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--fg)}
 #today .count span{font-size:12.5px;color:var(--fg2)}
 #today .bar{height:2px;border-radius:2px;background:var(--surface2);margin:13px 0 14px;overflow:hidden}
-#today .bar i{display:block;height:100%;background:var(--fg3)}
+#today .bar i{display:block;height:100%;background:var(--fg2)}
 .cond-top{display:flex;align-items:center;gap:15px;margin-bottom:2px}
 .grade{width:62px;height:62px;border-radius:17px;display:grid;place-items:center;font-size:30px;font-weight:800;flex:0 0 auto}
 .grade.a{background:rgba(52,211,153,.16);color:var(--good);box-shadow:inset 0 0 0 1px rgba(52,211,153,.3)}
@@ -246,42 +247,42 @@ button:not(.tabbar button):not(.fchip){color:var(--fg2)}
 .grade.c{background:rgba(251,191,36,.12);color:var(--warn);box-shadow:inset 0 0 0 1px rgba(251,191,36,.25)}
 .grade.d{background:rgba(248,113,113,.12);color:var(--bad);box-shadow:inset 0 0 0 1px rgba(248,113,113,.25)}
 .grade.x{background:var(--surface2);color:var(--fg3)}
-.cond-top .t{font-size:14.5px;font-weight:700;color:var(--fg)}
-.cond-top .s{font-size:12px;color:var(--fg2);margin-top:2px}
+.cond-top .t{font-size:16px;font-weight:800;color:var(--fg)}
+.cond-top .s{font-size:12.5px;color:var(--fg2);margin-top:3px}
 .flag{display:block;margin-top:11px;padding:8px 11px;border-radius:9px;background:rgba(251,191,36,.1);
  color:var(--warn);font-size:12px;font-weight:600;box-shadow:inset 0 0 0 1px rgba(251,191,36,.22);line-height:1.6}
 .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-radius:12px;overflow:hidden;margin-top:14px}
 .m{background:var(--surface);padding:11px 12px;min-width:0}
-.m .k{font-size:10.5px;color:var(--fg3);letter-spacing:.06em;font-weight:600}
+.m .k{font-size:12px;color:var(--fg2);letter-spacing:.02em;font-weight:600}
 .m .v{display:flex;align-items:baseline;gap:5px;margin-top:3px}
-.m .v b{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.1;color:var(--fg)}
+.m .v b{font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.05;color:var(--fg)}
 .m .v u{text-decoration:none;font-size:11px;color:var(--fg3)}
-.m .d{font-size:11px;margin-top:3px;color:var(--fg3);line-height:1.5}
+.m .d{font-size:12px;color:var(--fg3);margin-top:5px;line-height:1.55}
 .m .d em{font-style:normal;font-weight:700}
 .up{color:var(--good)}.dn{color:var(--bad)}.fl{color:var(--fg3)}
 .spark{display:block;margin-top:7px}
-.analysis{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--fg2);line-height:1.8}
+.analysis{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px;color:var(--fg2);line-height:1.8}
 .analysis p{margin:0 0 7px}.analysis p:last-child{margin:0}
 .analysis b{color:var(--fg);font-weight:700}
 .ms .r .trend{font-size:12px;font-weight:700;white-space:nowrap}
-.note2{font-size:11.5px;color:var(--fg3);margin:-6px 0 12px;line-height:1.6}
+.note2{font-size:12px;color:var(--fg3);margin:-6px 0 12px;line-height:1.6}
 .st{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line)}
 .st:last-of-type{border:0;padding-bottom:2px}
-.st-l{flex:0 0 44px;font-size:21px;font-weight:700;color:var(--fg2);line-height:1.1;padding-top:2px}
+.st-l{flex:0 0 46px;font-size:22px;font-weight:800;color:var(--fg2);line-height:1.1;padding-top:3px}
 .st-l span{font-size:11px;font-weight:600;color:var(--fg3);margin-left:1px}
 .st-m{min-width:0;flex:1}
-.st-m>b{font-size:34px;font-weight:700;letter-spacing:-.02em;color:var(--accent);line-height:1;display:block}
-.st-r{font-size:12.5px;color:var(--fg2);margin-top:5px}
-.st-n{font-size:11.5px;color:var(--fg3);margin-top:4px;line-height:1.55}
-.st-wait{font-size:11.5px;color:var(--fg3);line-height:1.9;padding-top:12px;border-top:1px solid var(--line);margin-top:4px}
+.st-m>b{font-size:36px;font-weight:800;letter-spacing:-.03em;color:var(--accent);line-height:1;display:block}
+.st-r{font-size:13.5px;color:var(--fg2);margin-top:6px;font-weight:600}
+.st-n{font-size:12px;color:var(--fg3);margin-top:5px;line-height:1.6}
+.st-wait{font-size:12px;color:var(--fg3);line-height:1.9;padding-top:12px;border-top:1px solid var(--line);margin-top:4px}
 .st-wait span{color:var(--line);color:#656F82}
 .ms{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
 .ms:last-child{border:0;padding-bottom:0}.ms:first-of-type{padding-top:0}
-.grp{font-size:10.5px;letter-spacing:.1em;color:var(--fg3);font-weight:700;margin:16px 0 7px}
+.grp{font-size:12px;letter-spacing:.06em;color:var(--fg2);font-weight:700;margin:18px 0 8px}
 .grp:first-of-type{margin-top:14px}
 .ms .l{min-width:0;padding-right:10px}
-.ms .l .n{font-size:14px;font-weight:700;color:var(--fg)}
-.ms .l .s{font-size:11.5px;color:var(--fg3);margin-top:2px}
+.ms .l .n{font-size:15px;font-weight:700;color:var(--fg)}
+.ms .l .s{font-size:12px;color:var(--fg3);margin-top:3px}
 .ms .r{text-align:right;flex:0 0 auto}
 .ms .r b{font-size:19px;font-weight:700;color:var(--fg)}
 .ms .r span{font-size:11px;color:var(--fg3);margin-left:3px}
@@ -289,7 +290,7 @@ button:not(.tabbar button):not(.fchip){color:var(--fg2)}
 </style></head><body>
 <header>
   <div class="brand"><span class="dot"></span>マラソンログ</div>
-  <div class="chips"><span>累計 <b>725</b>km</span><span><b>87</b>本</span><span>目標 <b>サブエガ 2:50</b></span><span>更新 10/15 15:19</span></div>
+  <div class="chips"><span>累計 <b>725</b>km</span><span><b>87</b>本</span><span>目標 <b>サブエガ 2:50</b></span><span>更新 10/15 15:23</span></div>
 </header>
 <div class="chnav" id="chnav"><button type="button" data-ch="ch1">Ⅰ. 課題</button><button type="button" data-ch="ch2">Ⅱ. 原則</button><button type="button" data-ch="ch3">Ⅲ. 土台</button><button type="button" data-ch="ch4">Ⅳ. 15週ブロック</button><button type="button" data-ch="ch5">Ⅴ. 本番と管理</button><button type="button" data-ch="ch6">Ⅵ. 何を見て判断するか</button><button type="button" class="allbtn" data-all="1">全部開く</button></div>
 <main class="wrap">
